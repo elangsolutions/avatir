@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AgreementStatus {
+  draft
+  active
+  paused
+  closed
+}
+
+model User {
+  id         String      @id @default(cuid())
+  name       String
+  email      String      @unique
+  role       String      @default("operator")
+  avatarUrl  String?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  agreements Agreement[] @relation("AgreementOwner")
+}
+
+model Agreement {
+  id          String           @id @default(cuid())
+  title       String
+  clientName  String
+  amount      Decimal          @db.Decimal(12, 2)
+  currency    String           @default("USD")
+  status      AgreementStatus  @default(draft)
+  startDate   DateTime?
+  endDate     DateTime?
+  notes       String?
+  ownerId     String?
+  owner       User?            @relation("AgreementOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
