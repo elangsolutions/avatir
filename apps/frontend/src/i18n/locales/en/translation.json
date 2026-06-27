@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "title": "AVATIR",
+    "description": "AVATIR - mobile-first assurance deal management."
+  },
+  "brand": {
+    "name": "AVATIR",
+    "tagline": "Assurance deals",
+    "taglineFallback": "Mobile-first assurance deal management",
+    "shellDescription": "Manage users and agreements from a polished mobile-first workspace.",
+    "mobileHeader": "Assurance operations"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "agreements": "Agreements"
+  },
+  "common": {
+    "signOut": "Sign out",
+    "exit": "Exit",
+    "crudArea": "CRUD area",
+    "language": "Language"
+  },
+  "language": {
+    "en": "English",
+    "es": "Español",
+    "enShort": "EN",
+    "esShort": "ES"
+  },
+  "auth": {
+    "heroHeading": "Assurance deal management that feels premium on mobile.",
+    "heroSubtext": "Sign in or create an account to manage users and agreements with a focused, polished workspace.",
+    "benefits": {
+      "workspace": "Track assurance deals from one mobile-first workspace.",
+      "dataModel": "Keep users and agreements organized with a clean data model.",
+      "google": "Prepare Google sign-in now and wire credentials later."
+    },
+    "quickStatus": "Quick status",
+    "shellReady": "Mobile-first shell ready",
+    "shellReadyDetail": "The first pass includes the auth screen, Google placeholder, and navigation for users and agreements.",
+    "sectionLabel": "Authentication",
+    "welcomeBack": "Welcome back",
+    "createAccount": "Create your AVATIR account",
+    "signInDescription": "Use the existing account flow or switch to signup to create a new workspace identity.",
+    "signUpDescription": "Create a profile for your team and get ready to manage assurance deals.",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "fullName": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "fullNamePlaceholder": "Alex Rivera",
+    "emailPlaceholder": "you@company.com",
+    "passwordPlaceholder": "••••••••",
+    "continue": "Continue to AVATIR",
+    "createAccountCta": "Create account",
+    "continueWithGoogle": "Continue with Google",
+    "googleReady": "Ready to connect Google sign-in.",
+    "googlePending": "Google sign-in will be connected when credentials are added."
+  },
+  "dashboard": {
+    "badge": "Workspace overview",
+    "metrics": {
+      "activeUsers": {
+        "label": "Active users",
+        "detail": "Ready for CRUD wiring"
+      },
+      "agreements": {
+        "label": "Agreements",
+        "detail": "Mobile-ready flow planned"
+      },
+      "googleAuth": {
+        "label": "Google auth",
+        "value": "Placeholder",
+        "detail": "Credentials come later"
+      }
+    },
+    "nextSteps": {
+      "title": "Next steps",
+      "body": "Add list, create, edit, and detail flows for users and agreements. The shell is already mobile-first and ready for data."
+    },
+    "googleAuth": {
+      "title": "Google auth",
+      "body": "The login button is in place now. The next backend step is wiring real OAuth credentials and a session token.",
+      "cta": "Review auth setup"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "description": "This is the first placeholder view for the users management flow.",
+    "addUser": "Add user",
+    "roles": {
+      "admin": "Admin",
+      "reviewer": "Reviewer",
+      "operator": "Operator"
+    }
+  },
+  "agreements": {
+    "title": "Agreements",
+    "description": "This placeholder view gives the agreements workflow a clean starting point.",
+    "addAgreement": "Add agreement",
+    "statuses": {
+      "active": "Active",
+      "draft": "Draft",
+      "paused": "Paused"
+    },
+    "mock": {
+      "primaryServicing": "Primary servicing",
+      "reviewCycle": "Review cycle",
+      "renewalPlan": "Renewal plan"
+    }
+  }
+}

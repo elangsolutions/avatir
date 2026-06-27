@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "title": "AVATIR",
+    "description": "AVATIR - gestión de acuerdos de seguros mobile-first."
+  },
+  "brand": {
+    "name": "AVATIR",
+    "tagline": "Acuerdos de seguros",
+    "taglineFallback": "Gestión de acuerdos de seguros mobile-first",
+    "shellDescription": "Administra usuarios y acuerdos desde un espacio de trabajo mobile-first y pulido.",
+    "mobileHeader": "Operaciones de seguros"
+  },
+  "nav": {
+    "dashboard": "Panel",
+    "users": "Usuarios",
+    "agreements": "Acuerdos"
+  },
+  "common": {
+    "signOut": "Cerrar sesión",
+    "exit": "Salir",
+    "crudArea": "Área CRUD",
+    "language": "Idioma"
+  },
+  "language": {
+    "en": "English",
+    "es": "Español",
+    "enShort": "EN",
+    "esShort": "ES"
+  },
+  "auth": {
+    "heroHeading": "Gestión de acuerdos de seguros con una experiencia premium en móvil.",
+    "heroSubtext": "Inicia sesión o crea una cuenta para administrar usuarios y acuerdos en un espacio de trabajo enfocado y pulido.",
+    "benefits": {
+      "workspace": "Haz seguimiento de acuerdos de seguros desde un espacio mobile-first.",
+      "dataModel": "Mantén usuarios y acuerdos organizados con un modelo de datos limpio.",
+      "google": "Prepara el inicio de sesión con Google ahora y conecta las credenciales después."
+    },
+    "quickStatus": "Estado rápido",
+    "shellReady": "Interfaz mobile-first lista",
+    "shellReadyDetail": "La primera versión incluye la pantalla de autenticación, el placeholder de Google y la navegación para usuarios y acuerdos.",
+    "sectionLabel": "Autenticación",
+    "welcomeBack": "Bienvenido de nuevo",
+    "createAccount": "Crea tu cuenta de AVATIR",
+    "signInDescription": "Usa el flujo de cuenta existente o cambia a registro para crear una nueva identidad de espacio de trabajo.",
+    "signUpDescription": "Crea un perfil para tu equipo y prepárate para administrar acuerdos de seguros.",
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "fullNamePlaceholder": "Alex Rivera",
+    "emailPlaceholder": "tu@empresa.com",
+    "passwordPlaceholder": "••••••••",
+    "continue": "Continuar a AVATIR",
+    "createAccountCta": "Crear cuenta",
+    "continueWithGoogle": "Continuar con Google",
+    "googleReady": "Listo para conectar el inicio de sesión con Google.",
+    "googlePending": "El inicio de sesión con Google se conectará cuando se agreguen las credenciales."
+  },
+  "dashboard": {
+    "badge": "Resumen del espacio de trabajo",
+    "metrics": {
+      "activeUsers": {
+        "label": "Usuarios activos",
+        "detail": "Listo para conectar CRUD"
+      },
+      "agreements": {
+        "label": "Acuerdos",
+        "detail": "Flujo mobile-first planificado"
+      },
+      "googleAuth": {
+        "label": "Auth de Google",
+        "value": "Placeholder",
+        "detail": "Las credenciales llegarán después"
+      }
+    },
+    "nextSteps": {
+      "title": "Próximos pasos",
+      "body": "Agrega flujos de listado, creación, edición y detalle para usuarios y acuerdos. La interfaz ya es mobile-first y está lista para datos."
+    },
+    "googleAuth": {
+      "title": "Auth de Google",
+      "body": "El botón de inicio de sesión ya está en su lugar. El siguiente paso del backend es conectar credenciales OAuth reales y un token de sesión.",
+      "cta": "Revisar configuración de auth"
+    }
+  },
+  "users": {
+    "title": "Usuarios",
+    "description": "Esta es la primera vista placeholder para el flujo de gestión de usuarios.",
+    "addUser": "Agregar usuario",
+    "roles": {
+      "admin": "Administrador",
+      "reviewer": "Revisor",
+      "operator": "Operador"
+    }
+  },
+  "agreements": {
+    "title": "Acuerdos",
+    "description": "Esta vista placeholder ofrece un punto de partida limpio para el flujo de acuerdos.",
+    "addAgreement": "Agregar acuerdo",
+    "statuses": {
+      "active": "Activo",
+      "draft": "Borrador",
+      "paused": "Pausado"
+    },
+    "mock": {
+      "primaryServicing": "Servicio principal",
+      "reviewCycle": "Ciclo de revisión",
+      "renewalPlan": "Plan de renovación"
+    }
+  }
+}

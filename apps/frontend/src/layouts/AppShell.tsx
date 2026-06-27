@@ -1,13 +1,16 @@
 import { Box, Button, Container, Flex, HStack, Stack, Text } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { LanguageSwitcher } from '../components/LanguageSwitcher';
 
 const navItems = [
-  { label: 'Dashboard', path: '/app' },
-  { label: 'Users', path: '/app/users' },
-  { label: 'Agreements', path: '/app/agreements' },
-];
+  { labelKey: 'nav.dashboard', path: '/app' },
+  { labelKey: 'nav.users', path: '/app/users' },
+  { labelKey: 'nav.agreements', path: '/app/agreements' },
+] as const;
 
 export function AppShell() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,13 +29,13 @@ export function AppShell() {
         <Stack gap={6} flex="1">
           <Box>
             <Text fontSize="xs" letterSpacing="0.24em" textTransform="uppercase" color="teal.300">
-              AVATIR
+              {t('brand.name')}
             </Text>
             <Text fontSize="2xl" fontWeight="700" mt={2}>
-              Assurance deals
+              {t('brand.tagline')}
             </Text>
             <Text color="whiteAlpha.700" mt={2}>
-              Manage users and agreements from a polished mobile-first workspace.
+              {t('brand.shellDescription')}
             </Text>
           </Box>
 
@@ -50,23 +53,25 @@ export function AppShell() {
                   _hover={{ bg: active ? 'teal.300' : 'whiteAlpha.100' }}
                   onClick={() => navigate(item.path)}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                 </Button>
               );
             })}
           </Stack>
         </Stack>
 
-        <Button
-          mt={8}
-          variant="outline"
-          borderColor="whiteAlpha.300"
-          color="white"
-          _hover={{ bg: 'whiteAlpha.100' }}
-          onClick={() => navigate('/auth')}
-        >
-          Sign out
-        </Button>
+        <Stack gap={4} mt={8}>
+          <LanguageSwitcher />
+          <Button
+            variant="outline"
+            borderColor="whiteAlpha.300"
+            color="white"
+            _hover={{ bg: 'whiteAlpha.100' }}
+            onClick={() => navigate('/auth')}
+          >
+            {t('common.signOut')}
+          </Button>
+        </Stack>
       </Flex>
 
       <Box flex="1">
@@ -81,24 +86,29 @@ export function AppShell() {
         >
           <Container maxW="7xl" px={{ base: 4, md: 8 }} py={4}>
             <Stack gap={4}>
-              <Flex align="center" justify="space-between">
+              <Flex align="center" justify="space-between" gap={4}>
                 <Box>
                   <Text fontSize="sm" color="teal.300" letterSpacing="0.18em" textTransform="uppercase">
-                    AVATIR
+                    {t('brand.name')}
                   </Text>
-                  <Text fontWeight="600">Assurance operations</Text>
+                  <Text fontWeight="600">{t('brand.mobileHeader')}</Text>
                 </Box>
 
-                <Button
-                  display={{ base: 'inline-flex', md: 'none' }}
-                  size="sm"
-                  variant="outline"
-                  borderColor="whiteAlpha.300"
-                  color="white"
-                  onClick={() => navigate('/auth')}
-                >
-                  Exit
-                </Button>
+                <HStack gap={3}>
+                  <Box display={{ base: 'none', md: 'block' }}>
+                    <LanguageSwitcher />
+                  </Box>
+                  <Button
+                    display={{ base: 'inline-flex', md: 'none' }}
+                    size="sm"
+                    variant="outline"
+                    borderColor="whiteAlpha.300"
+                    color="white"
+                    onClick={() => navigate('/auth')}
+                  >
+                    {t('common.exit')}
+                  </Button>
+                </HStack>
               </Flex>
 
               <HStack gap={2} overflowX="auto" display={{ base: 'flex', md: 'none' }}>
@@ -116,11 +126,15 @@ export function AppShell() {
                       borderColor="whiteAlpha.300"
                       onClick={() => navigate(item.path)}
                     >
-                      {item.label}
+                      {t(item.labelKey)}
                     </Button>
                   );
                 })}
               </HStack>
+
+              <Box display={{ base: 'block', md: 'none' }}>
+                <LanguageSwitcher />
+              </Box>
             </Stack>
           </Container>
         </Box>

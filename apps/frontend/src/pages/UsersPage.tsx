@@ -1,23 +1,26 @@
 import { Badge, Box, Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 
 const users = [
-  { name: 'Alex Rivera', email: 'alex@avatir.com', role: 'Admin' },
-  { name: 'Maya Chen', email: 'maya@avatir.com', role: 'Reviewer' },
-  { name: 'Jordan Lee', email: 'jordan@avatir.com', role: 'Operator' },
-];
+  { name: 'Alex Rivera', email: 'alex@avatir.com', roleKey: 'users.roles.admin' },
+  { name: 'Maya Chen', email: 'maya@avatir.com', roleKey: 'users.roles.reviewer' },
+  { name: 'Jordan Lee', email: 'jordan@avatir.com', roleKey: 'users.roles.operator' },
+] as const;
 
 export function UsersPage() {
+  const { t } = useTranslation();
+
   return (
     <Stack gap={6}>
       <Box>
         <Badge colorPalette="teal" variant="solid" px={3} py={1} borderRadius="full">
-          CRUD area
+          {t('common.crudArea')}
         </Badge>
         <Heading size="xl" mt={4}>
-          Users
+          {t('users.title')}
         </Heading>
         <Text color="whiteAlpha.700" mt={2}>
-          This is the first placeholder view for the users management flow.
+          {t('users.description')}
         </Text>
       </Box>
 
@@ -38,14 +41,14 @@ export function UsersPage() {
               {user.email}
             </Text>
             <Badge mt={4} colorPalette="teal" variant="subtle">
-              {user.role}
+              {t(user.roleKey)}
             </Badge>
           </Box>
         ))}
       </SimpleGrid>
 
       <Button alignSelf="start" bg="teal.400" color="gray.950">
-        Add user
+        {t('users.addUser')}
       </Button>
     </Stack>
   );

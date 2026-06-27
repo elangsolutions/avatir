@@ -1,0 +1,100 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Agreement {
+  amount: Float!
+  clientName: String!
+  createdAt: DateTime!
+  currency: String!
+  id: ID!
+  notes: String
+  ownerId: String
+  status: String!
+  title: String!
+  updatedAt: DateTime!
+}
+
+type AppInfo {
+  name: String!
+  status: String!
+  tagline: String!
+}
+
+type AuthOverview {
+  message: String!
+  providers: [AuthProvider!]!
+}
+
+type AuthProvider {
+  enabled: Boolean!
+  name: String!
+}
+
+input CreateAgreementInput {
+  amount: Float!
+  clientName: String!
+  currency: String
+  notes: String
+  ownerId: String
+  status: String
+  title: String!
+}
+
+input CreateUserInput {
+  avatarUrl: String
+  email: String!
+  name: String!
+  role: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createAgreement(input: CreateAgreementInput!): Agreement!
+  createUser(input: CreateUserInput!): User!
+  deleteAgreement(id: String!): Boolean!
+  deleteUser(id: String!): Boolean!
+  startGoogleSignIn: AuthOverview!
+  updateAgreement(id: String!, input: UpdateAgreementInput!): Agreement!
+  updateUser(id: String!, input: UpdateUserInput!): User!
+}
+
+type Query {
+  agreement(id: String!): Agreement!
+  agreements: [Agreement!]!
+  appInfo: AppInfo!
+  authOverview: AuthOverview!
+  user(id: String!): User!
+  users: [User!]!
+}
+
+input UpdateAgreementInput {
+  amount: Float
+  clientName: String
+  currency: String
+  notes: String
+  ownerId: String
+  status: String
+  title: String
+}
+
+input UpdateUserInput {
+  avatarUrl: String
+  email: String
+  name: String
+  role: String
+}
+
+type User {
+  avatarUrl: String
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  name: String!
+  role: String!
+  updatedAt: DateTime!
+}

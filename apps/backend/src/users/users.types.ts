@@ -14,7 +14,7 @@ export class User {
   @Field()
   role!: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   avatarUrl?: string | null;
 
   @Field()
@@ -32,24 +32,24 @@ export class CreateUserInput {
   @Field()
   email!: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   role?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   avatarUrl?: string;
 }
 
 @InputType()
 export class UpdateUserInput {
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   name?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   email?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   role?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   avatarUrl?: string;
 }

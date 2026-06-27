@@ -15,8 +15,10 @@
     "@emotion/styled": "^11.14.1",
     "framer-motion": "^12.42.0",
     "graphql": "^17.0.1",
+    "i18next": "^26.3.3",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-i18next": "^17.0.8",
     "react-router-dom": "^7.18.0"
   },
   "devDependencies": {

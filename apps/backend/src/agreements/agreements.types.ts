@@ -20,10 +20,10 @@ export class Agreement {
   @Field()
   status!: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   notes?: string | null;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   ownerId?: string | null;
 
   @Field()
@@ -44,39 +44,39 @@ export class CreateAgreementInput {
   @Field(() => Float)
   amount!: number;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   currency?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   status?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   notes?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   ownerId?: string;
 }
 
 @InputType()
 export class UpdateAgreementInput {
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   title?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   clientName?: string;
 
   @Field(() => Float, { nullable: true })
   amount?: number;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   currency?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   status?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   notes?: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   ownerId?: string;
 }

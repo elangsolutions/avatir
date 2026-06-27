@@ -1,30 +1,48 @@
 import { Badge, Box, Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 
 const agreements = [
-  { title: 'Primary servicing', client: 'Northwind Health', status: 'Active', amount: '$42,000' },
-  { title: 'Review cycle', client: 'Blue Peak', status: 'Draft', amount: '$18,500' },
-  { title: 'Renewal plan', client: 'Aster Labs', status: 'Paused', amount: '$63,250' },
-];
+  {
+    titleKey: 'agreements.mock.primaryServicing',
+    client: 'Northwind Health',
+    statusKey: 'agreements.statuses.active',
+    amount: '$42,000',
+  },
+  {
+    titleKey: 'agreements.mock.reviewCycle',
+    client: 'Blue Peak',
+    statusKey: 'agreements.statuses.draft',
+    amount: '$18,500',
+  },
+  {
+    titleKey: 'agreements.mock.renewalPlan',
+    client: 'Aster Labs',
+    statusKey: 'agreements.statuses.paused',
+    amount: '$63,250',
+  },
+] as const;
 
 export function AgreementsPage() {
+  const { t } = useTranslation();
+
   return (
     <Stack gap={6}>
       <Box>
         <Badge colorPalette="teal" variant="solid" px={3} py={1} borderRadius="full">
-          CRUD area
+          {t('common.crudArea')}
         </Badge>
         <Heading size="xl" mt={4}>
-          Agreements
+          {t('agreements.title')}
         </Heading>
         <Text color="whiteAlpha.700" mt={2}>
-          This placeholder view gives the agreements workflow a clean starting point.
+          {t('agreements.description')}
         </Text>
       </Box>
 
       <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={4}>
         {agreements.map((agreement) => (
           <Box
-            key={agreement.title}
+            key={agreement.titleKey}
             p={5}
             borderRadius="2xl"
             borderWidth="1px"
@@ -32,7 +50,7 @@ export function AgreementsPage() {
             bg="rgba(12, 18, 31, 0.92)"
           >
             <Text fontWeight="600" fontSize="lg">
-              {agreement.title}
+              {t(agreement.titleKey)}
             </Text>
             <Text color="whiteAlpha.700" mt={1}>
               {agreement.client}
@@ -41,14 +59,14 @@ export function AgreementsPage() {
               {agreement.amount}
             </Text>
             <Badge mt={4} colorPalette="teal" variant="subtle">
-              {agreement.status}
+              {t(agreement.statusKey)}
             </Badge>
           </Box>
         ))}
       </SimpleGrid>
 
       <Button alignSelf="start" bg="teal.400" color="gray.950">
-        Add agreement
+        {t('agreements.addAgreement')}
       </Button>
     </Stack>
   );

@@ -1,6 +1,7 @@
 import { Badge, Box, Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react';
-import { APP_INFO_QUERY } from '../graphql/app';
 import { useQuery } from '@apollo/client/react';
+import { useTranslation } from 'react-i18next';
+import { APP_INFO_QUERY } from '../graphql/app';
 
 type AppInfoQueryData = {
   appInfo?: {
@@ -10,33 +11,43 @@ type AppInfoQueryData = {
   } | null;
 };
 
-const metrics = [
-  { label: 'Active users', value: '12', detail: 'Ready for CRUD wiring' },
-  { label: 'Agreements', value: '24', detail: 'Mobile-ready flow planned' },
-  { label: 'Google auth', value: 'Placeholder', detail: 'Credentials come later' },
-];
+const metricKeys = [
+  {
+    key: 'activeUsers',
+    value: '12',
+  },
+  {
+    key: 'agreements',
+    value: '24',
+  },
+  {
+    key: 'googleAuth',
+    valueKey: 'dashboard.metrics.googleAuth.value',
+  },
+] as const;
 
 export function DashboardPage() {
+  const { t } = useTranslation();
   const { data } = useQuery<AppInfoQueryData>(APP_INFO_QUERY);
 
   return (
     <Stack gap={6}>
       <Box>
         <Badge colorPalette="teal" variant="solid" px={3} py={1} borderRadius="full">
-          Workspace overview
+          {t('dashboard.badge')}
         </Badge>
         <Heading size="xl" mt={4}>
-          {data?.appInfo?.name ?? 'AVATIR'}
+          {data?.appInfo?.name ?? t('brand.name')}
         </Heading>
         <Text color="whiteAlpha.700" mt={2} maxW="2xl">
-          {data?.appInfo?.tagline ?? 'Mobile-first assurance deal management'}
+          {data?.appInfo?.tagline ?? t('brand.taglineFallback')}
         </Text>
       </Box>
 
       <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-        {metrics.map((metric) => (
+        {metricKeys.map((metric) => (
           <Box
-            key={metric.label}
+            key={metric.key}
             p={5}
             borderRadius="2xl"
             borderWidth="1px"
@@ -44,13 +55,13 @@ export function DashboardPage() {
             bg="whiteAlpha.50"
           >
             <Text color="whiteAlpha.700" fontSize="sm" textTransform="uppercase" letterSpacing="0.16em">
-              {metric.label}
+              {t(`dashboard.metrics.${metric.key}.label`)}
             </Text>
             <Heading size="lg" mt={3}>
-              {metric.value}
+              {'valueKey' in metric ? t(metric.valueKey) : metric.value}
             </Heading>
             <Text color="whiteAlpha.700" mt={2}>
-              {metric.detail}
+              {t(`dashboard.metrics.${metric.key}.detail`)}
             </Text>
           </Box>
         ))}
@@ -64,9 +75,9 @@ export function DashboardPage() {
           borderColor="whiteAlpha.200"
           bg="rgba(12, 18, 31, 0.92)"
         >
-          <Text fontWeight="600">Next steps</Text>
+          <Text fontWeight="600">{t('dashboard.nextSteps.title')}</Text>
           <Text color="whiteAlpha.700" mt={2}>
-            Add list, create, edit, and detail flows for users and agreements. The shell is already mobile-first and ready for data.
+            {t('dashboard.nextSteps.body')}
           </Text>
         </Box>
 
@@ -77,12 +88,12 @@ export function DashboardPage() {
           borderColor="whiteAlpha.200"
           bg="rgba(12, 18, 31, 0.92)"
         >
-          <Text fontWeight="600">Google auth</Text>
+          <Text fontWeight="600">{t('dashboard.googleAuth.title')}</Text>
           <Text color="whiteAlpha.700" mt={2}>
-            The login button is in place now. The next backend step is wiring real OAuth credentials and a session token.
+            {t('dashboard.googleAuth.body')}
           </Text>
           <Button mt={4} bg="teal.400" color="gray.950">
-            Review auth setup
+            {t('dashboard.googleAuth.cta')}
           </Button>
         </Box>
       </SimpleGrid>
