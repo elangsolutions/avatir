@@ -1,14 +1,14 @@
 {
   "meta": {
     "title": "AVATIR",
-    "description": "AVATIR - gestión de acuerdos de seguros mobile-first."
+    "description": "AVATIR — plataforma de gestión de seguros de caución corporativos."
   },
   "brand": {
     "name": "AVATIR",
-    "tagline": "Acuerdos de seguros",
-    "taglineFallback": "Gestión de acuerdos de seguros mobile-first",
-    "shellDescription": "Administra usuarios y acuerdos desde un espacio de trabajo mobile-first y pulido.",
-    "mobileHeader": "Operaciones de seguros"
+    "tagline": "Operatoria de caución",
+    "taglineFallback": "Gestión de seguros de caución corporativos",
+    "shellDescription": "Administra productores, solicitudes, documentación y emisiones desde un único espacio operativo.",
+    "mobileHeader": "Operatoria de caución"
   },
   "nav": {
     "dashboard": "Panel",
@@ -28,21 +28,35 @@
     "esShort": "ES"
   },
   "auth": {
-    "heroHeading": "Gestión de acuerdos de seguros con una experiencia premium en móvil.",
-    "heroSubtext": "Inicia sesión o crea una cuenta para administrar usuarios y acuerdos en un espacio de trabajo enfocado y pulido.",
+    "heroEyebrow": "Seguros de caución corporativos",
+    "heroHeading": "Digitalizá la operatoria de caución en un solo lugar.",
+    "heroSubtext": "AVATIR conecta productores, equipos de operaciones y aseguradoras en una plataforma para gestionar solicitudes de caución, documentación, aprobaciones y emisiones — con un MVP enfocado en rapidez de implementación y escalabilidad futura.",
     "benefits": {
-      "workspace": "Haz seguimiento de acuerdos de seguros desde un espacio mobile-first.",
-      "dataModel": "Mantén usuarios y acuerdos organizados con un modelo de datos limpio.",
-      "google": "Prepara el inicio de sesión con Google ahora y conecta las credenciales después."
+      "centralize": "Centralizá solicitudes, documentos y emisiones en lugar de depender de planillas, correos y archivos dispersos.",
+      "workflow": "Recorré cada solicitud con un flujo claro — borrador, envío, observación, revisión, aprobación y emisión — con historial completo de estados.",
+      "partners": "Gestioná productores, empresas y carteras comerciales con roles, permisos y protección de cartera por productor.",
+      "traceability": "Mantené trazabilidad operativa con historial de cambios, observaciones, aprobaciones, rechazos y auditoría básica de accesos."
     },
-    "quickStatus": "Estado rápido",
-    "shellReady": "Interfaz mobile-first lista",
-    "shellReadyDetail": "La primera versión incluye la pantalla de autenticación, el placeholder de Google y la navegación para usuarios y acuerdos.",
-    "sectionLabel": "Autenticación",
+    "mvp": {
+      "label": "Alcance MVP",
+      "title": "Pensado para el flujo principal de negocio",
+      "detail": "La primera versión cubre la operatoria de punta a punta sin integraciones complejas en tiempo real con aseguradoras. El equipo de operaciones puede trabajar de forma asistida hoy; portales e integraciones llegan en fases posteriores.",
+      "modules": {
+        "users": "Usuarios y permisos",
+        "producers": "Productores y empresas",
+        "documents": "Gestión documental",
+        "requests": "Solicitudes de caución",
+        "workflow": "Workflow operativo",
+        "policies": "Emisiones de pólizas",
+        "dashboard": "Dashboard y reportes",
+        "notifications": "Alertas por correo"
+      }
+    },
+    "sectionLabel": "Acceso",
     "welcomeBack": "Bienvenido de nuevo",
-    "createAccount": "Crea tu cuenta de AVATIR",
-    "signInDescription": "Usa el flujo de cuenta existente o cambia a registro para crear una nueva identidad de espacio de trabajo.",
-    "signUpDescription": "Crea un perfil para tu equipo y prepárate para administrar acuerdos de seguros.",
+    "createAccount": "Creá tu cuenta en AVATIR",
+    "signInDescription": "Ingresá para gestionar solicitudes de caución, seguir el estado del workflow y acceder a documentación y emisiones de tu equipo.",
+    "signUpDescription": "Configurá el acceso para productores, operadores y administradores que van a usar la plataforma en la operatoria diaria.",
     "signIn": "Iniciar sesión",
     "signUp": "Registrarse",
     "fullName": "Nombre completo",
@@ -51,11 +65,11 @@
     "fullNamePlaceholder": "Alex Rivera",
     "emailPlaceholder": "tu@empresa.com",
     "passwordPlaceholder": "••••••••",
-    "continue": "Continuar a AVATIR",
+    "continue": "Ingresar al espacio de trabajo",
     "createAccountCta": "Crear cuenta",
     "continueWithGoogle": "Continuar con Google",
-    "googleReady": "Listo para conectar el inicio de sesión con Google.",
-    "googlePending": "El inicio de sesión con Google se conectará cuando se agreguen las credenciales."
+    "googleReady": "El inicio de sesión con Google estará disponible en una versión posterior.",
+    "googlePending": "El inicio de sesión con Google se conectará cuando se configuren las credenciales OAuth."
   },
   "dashboard": {
     "badge": "Resumen del espacio de trabajo",

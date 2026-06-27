@@ -1,14 +1,14 @@
 {
   "meta": {
     "title": "AVATIR",
-    "description": "AVATIR - mobile-first assurance deal management."
+    "description": "AVATIR — corporate surety insurance management platform."
   },
   "brand": {
     "name": "AVATIR",
-    "tagline": "Assurance deals",
-    "taglineFallback": "Mobile-first assurance deal management",
-    "shellDescription": "Manage users and agreements from a polished mobile-first workspace.",
-    "mobileHeader": "Assurance operations"
+    "tagline": "Surety operations",
+    "taglineFallback": "Corporate surety insurance management",
+    "shellDescription": "Manage producers, requests, documents, and policy emissions from one operational workspace.",
+    "mobileHeader": "Surety operations"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -28,21 +28,35 @@
     "esShort": "ES"
   },
   "auth": {
-    "heroHeading": "Assurance deal management that feels premium on mobile.",
-    "heroSubtext": "Sign in or create an account to manage users and agreements with a focused, polished workspace.",
+    "heroEyebrow": "Corporate surety insurance",
+    "heroHeading": "Digitalize caución operations in one place.",
+    "heroSubtext": "AVATIR connects producers, operations teams, and insurers in a single platform to manage surety requests, documentation, approvals, and policy issuance — starting with a focused MVP built for speed and future scale.",
     "benefits": {
-      "workspace": "Track assurance deals from one mobile-first workspace.",
-      "dataModel": "Keep users and agreements organized with a clean data model.",
-      "google": "Prepare Google sign-in now and wire credentials later."
+      "centralize": "Centralize surety requests, documents, and policy emissions instead of juggling spreadsheets and email threads.",
+      "workflow": "Run each request through a structured workflow — from draft to review, approval, and issuance — with full status history.",
+      "partners": "Manage producers, companies, and portfolio relationships with role-based access and commercial portfolio protection.",
+      "traceability": "Keep complete traceability with change history, comments, approvals, rejections, and basic access audit."
     },
-    "quickStatus": "Quick status",
-    "shellReady": "Mobile-first shell ready",
-    "shellReadyDetail": "The first pass includes the auth screen, Google placeholder, and navigation for users and agreements.",
-    "sectionLabel": "Authentication",
+    "mvp": {
+      "label": "MVP scope",
+      "title": "Built for the core business flow",
+      "detail": "The first release covers the end-to-end operational flow without complex real-time insurer integrations. Operations can work assisted today; insurer portals and APIs come in later phases.",
+      "modules": {
+        "users": "Users & permissions",
+        "producers": "Producers & companies",
+        "documents": "Document management",
+        "requests": "Surety requests",
+        "workflow": "Operational workflow",
+        "policies": "Policy emissions",
+        "dashboard": "Dashboard & reports",
+        "notifications": "Email alerts"
+      }
+    },
+    "sectionLabel": "Access",
     "welcomeBack": "Welcome back",
     "createAccount": "Create your AVATIR account",
-    "signInDescription": "Use the existing account flow or switch to signup to create a new workspace identity.",
-    "signUpDescription": "Create a profile for your team and get ready to manage assurance deals.",
+    "signInDescription": "Sign in to manage surety requests, track workflow status, and access documents and emissions for your team.",
+    "signUpDescription": "Set up access for producers, operators, and administrators who will run surety operations on the platform.",
     "signIn": "Sign in",
     "signUp": "Sign up",
     "fullName": "Full name",
@@ -51,11 +65,11 @@
     "fullNamePlaceholder": "Alex Rivera",
     "emailPlaceholder": "you@company.com",
     "passwordPlaceholder": "••••••••",
-    "continue": "Continue to AVATIR",
+    "continue": "Enter workspace",
     "createAccountCta": "Create account",
     "continueWithGoogle": "Continue with Google",
-    "googleReady": "Ready to connect Google sign-in.",
-    "googlePending": "Google sign-in will be connected when credentials are added."
+    "googleReady": "Google sign-in will be available in a later release.",
+    "googlePending": "Google sign-in will be connected once OAuth credentials are configured."
   },
   "dashboard": {
     "badge": "Workspace overview",
