@@ -10,6 +10,8 @@ RUN yarn install --frozen-lockfile
 
 FROM deps AS build
 COPY . .
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
 RUN yarn workspace @avatir/backend prisma:generate
 RUN yarn workspace @avatir/backend build
 
