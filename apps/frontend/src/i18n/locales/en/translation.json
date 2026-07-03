@@ -19,7 +19,9 @@
     "signOut": "Sign out",
     "exit": "Exit",
     "crudArea": "CRUD area",
-    "language": "Language"
+    "language": "Language",
+    "theme": "Theme",
+    "backToHome": "Back to home"
   },
   "language": {
     "en": "English",
@@ -27,17 +29,34 @@
     "enShort": "EN",
     "esShort": "ES"
   },
-  "auth": {
-    "heroEyebrow": "Corporate surety insurance",
-    "heroHeading": "Digitalize caución operations in one place.",
-    "heroSubtext": "AVATIR connects producers, operations teams, and insurers in a single platform to manage surety requests, documentation, approvals, and policy issuance — starting with a focused MVP built for speed and future scale.",
-    "benefits": {
-      "centralize": "Centralize surety requests, documents, and policy emissions instead of juggling spreadsheets and email threads.",
-      "workflow": "Run each request through a structured workflow — from draft to review, approval, and issuance — with full status history.",
-      "partners": "Manage producers, companies, and portfolio relationships with role-based access and commercial portfolio protection.",
-      "traceability": "Keep complete traceability with change history, comments, approvals, rejections, and basic access audit."
+  "theme": {
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "landing": {
+    "nav": {
+      "aboutUs": "About us",
+      "products": "Products",
+      "signIn": "Sign in"
     },
-    "mvp": {
+    "hero": {
+      "eyebrow": "Corporate surety insurance",
+      "heading": "Digitalize caución operations in one place.",
+      "subtext": "AVATIR connects producers, operations teams, and insurers in a single platform to manage surety requests, documentation, approvals, and policy issuance — starting with a focused MVP built for speed and future scale.",
+      "primaryCta": "Sign in to your workspace",
+      "secondaryCta": "Explore products"
+    },
+    "aboutUs": {
+      "title": "Built for surety operations teams",
+      "body": "AVATIR centralizes surety requests, documents, and policy emissions instead of juggling spreadsheets and email threads, giving operations, producers, and insurers one shared source of truth.",
+      "benefits": {
+        "centralize": "Centralize surety requests, documents, and policy emissions instead of juggling spreadsheets and email threads.",
+        "workflow": "Run each request through a structured workflow — from draft to review, approval, and issuance — with full status history.",
+        "partners": "Manage producers, companies, and portfolio relationships with role-based access and commercial portfolio protection.",
+        "traceability": "Keep complete traceability with change history, comments, approvals, rejections, and basic access audit."
+      }
+    },
+    "products": {
       "label": "MVP scope",
       "title": "Built for the core business flow",
       "detail": "The first release covers the end-to-end operational flow without complex real-time insurer integrations. Operations can work assisted today; insurer portals and APIs come in later phases.",
@@ -51,7 +70,9 @@
         "dashboard": "Dashboard & reports",
         "notifications": "Email alerts"
       }
-    },
+    }
+  },
+  "auth": {
     "sectionLabel": "Access",
     "welcomeBack": "Welcome back",
     "createAccount": "Create your AVATIR account",

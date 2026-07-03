@@ -1,55 +1,44 @@
 import { HStack, SegmentGroup, Text } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { supportedLanguages, type SupportedLanguage } from '../i18n';
-import { useAppTheme } from '../theme/app-theme';
+import { useAppTheme, type AppThemeMode } from '../theme/app-theme';
 
-type LanguageSwitcherProps = {
+type ThemeSwitcherProps = {
   size?: 'sm' | 'md';
   showLabel?: boolean;
 };
 
-function resolveLanguage(language: string): SupportedLanguage {
-  if (supportedLanguages.includes(language as SupportedLanguage)) {
-    return language as SupportedLanguage;
-  }
-
-  const base = language.split('-')[0];
-  if (supportedLanguages.includes(base as SupportedLanguage)) {
-    return base as SupportedLanguage;
-  }
-
-  return 'en';
-}
-
-export function LanguageSwitcher({ size = 'sm', showLabel = false }: LanguageSwitcherProps) {
-  const { i18n, t } = useTranslation();
-  const { palette } = useAppTheme();
+export function ThemeSwitcher({ size = 'sm', showLabel = false }: ThemeSwitcherProps) {
+  const { t } = useTranslation();
+  const { mode, setMode, palette } = useAppTheme();
 
   const items = useMemo(
     () =>
-      supportedLanguages.map((language) => ({
-        value: language,
-        label: t(`language.${language}Short`),
+      (['light', 'dark'] as const).map((value) => ({
+        value,
+        label: t(`theme.${value}`),
       })),
     [t],
   );
 
-  const value = resolveLanguage(i18n.language);
-
   return (
     <HStack gap={3} align="center">
       {showLabel && (
-        <Text fontSize="xs" color={palette.mutedText} textTransform="uppercase" letterSpacing="0.14em">
-          {t('common.language')}
+        <Text
+          fontSize="xs"
+          color={palette.mutedText}
+          textTransform="uppercase"
+          letterSpacing="0.14em"
+        >
+          {t('common.theme')}
         </Text>
       )}
       <SegmentGroup.Root
         size={size}
-        value={value}
+        value={mode}
         onValueChange={(details) => {
           if (details.value) {
-            void i18n.changeLanguage(details.value as SupportedLanguage);
+            setMode(details.value as AppThemeMode);
           }
         }}
         css={{
@@ -62,7 +51,7 @@ export function LanguageSwitcher({ size = 'sm', showLabel = false }: LanguageSwi
           minHeight: '36px',
           '& [data-part="item"]': {
             minH: '32px',
-            minW: '48px',
+            minW: '72px',
             borderRadius: 'full',
             px: '12px',
             fontWeight: '600',

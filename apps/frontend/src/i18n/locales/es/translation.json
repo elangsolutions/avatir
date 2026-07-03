@@ -19,7 +19,9 @@
     "signOut": "Cerrar sesión",
     "exit": "Salir",
     "crudArea": "Área CRUD",
-    "language": "Idioma"
+    "language": "Idioma",
+    "theme": "Tema",
+    "backToHome": "Volver al inicio"
   },
   "language": {
     "en": "English",
@@ -27,17 +29,34 @@
     "enShort": "EN",
     "esShort": "ES"
   },
-  "auth": {
-    "heroEyebrow": "Seguros de caución corporativos",
-    "heroHeading": "Digitalizá la operatoria de caución en un solo lugar.",
-    "heroSubtext": "AVATIR conecta productores, equipos de operaciones y aseguradoras en una plataforma para gestionar solicitudes de caución, documentación, aprobaciones y emisiones — con un MVP enfocado en rapidez de implementación y escalabilidad futura.",
-    "benefits": {
-      "centralize": "Centralizá solicitudes, documentos y emisiones en lugar de depender de planillas, correos y archivos dispersos.",
-      "workflow": "Recorré cada solicitud con un flujo claro — borrador, envío, observación, revisión, aprobación y emisión — con historial completo de estados.",
-      "partners": "Gestioná productores, empresas y carteras comerciales con roles, permisos y protección de cartera por productor.",
-      "traceability": "Mantené trazabilidad operativa con historial de cambios, observaciones, aprobaciones, rechazos y auditoría básica de accesos."
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro"
+  },
+  "landing": {
+    "nav": {
+      "aboutUs": "Quiénes somos",
+      "products": "Productos",
+      "signIn": "Iniciar sesión"
     },
-    "mvp": {
+    "hero": {
+      "eyebrow": "Seguros de caución corporativos",
+      "heading": "Digitalizá la operatoria de caución en un solo lugar.",
+      "subtext": "AVATIR conecta productores, equipos de operaciones y aseguradoras en una plataforma para gestionar solicitudes de caución, documentación, aprobaciones y emisiones — con un MVP enfocado en rapidez de implementación y escalabilidad futura.",
+      "primaryCta": "Ingresar a tu espacio de trabajo",
+      "secondaryCta": "Ver productos"
+    },
+    "aboutUs": {
+      "title": "Pensado para equipos de operaciones de caución",
+      "body": "AVATIR centraliza solicitudes, documentos y emisiones en lugar de depender de planillas, correos y archivos dispersos, dando a operaciones, productores y aseguradoras una única fuente de verdad.",
+      "benefits": {
+        "centralize": "Centralizá solicitudes, documentos y emisiones en lugar de depender de planillas, correos y archivos dispersos.",
+        "workflow": "Recorré cada solicitud con un flujo claro — borrador, envío, observación, revisión, aprobación y emisión — con historial completo de estados.",
+        "partners": "Gestioná productores, empresas y carteras comerciales con roles, permisos y protección de cartera por productor.",
+        "traceability": "Mantené trazabilidad operativa con historial de cambios, observaciones, aprobaciones, rechazos y auditoría básica de accesos."
+      }
+    },
+    "products": {
       "label": "Alcance MVP",
       "title": "Pensado para el flujo principal de negocio",
       "detail": "La primera versión cubre la operatoria de punta a punta sin integraciones complejas en tiempo real con aseguradoras. El equipo de operaciones puede trabajar de forma asistida hoy; portales e integraciones llegan en fases posteriores.",
@@ -51,7 +70,9 @@
         "dashboard": "Dashboard y reportes",
         "notifications": "Alertas por correo"
       }
-    },
+    }
+  },
+  "auth": {
     "sectionLabel": "Acceso",
     "welcomeBack": "Bienvenido de nuevo",
     "createAccount": "Creá tu cuenta en AVATIR",

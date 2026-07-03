@@ -6,15 +6,18 @@ import { App } from './App';
 import { apolloClient } from './apollo';
 import { ApolloProvider } from '@apollo/client/react';
 import './i18n';
+import { AppThemeProvider } from './theme/app-theme';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ChakraProvider value={defaultSystem}>
-      <ApolloProvider client={apolloClient}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ApolloProvider>
+      <AppThemeProvider>
+        <ApolloProvider client={apolloClient}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ApolloProvider>
+      </AppThemeProvider>
     </ChakraProvider>
   </React.StrictMode>,
 );

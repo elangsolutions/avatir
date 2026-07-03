@@ -2,6 +2,7 @@ import { Badge, Box, Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui
 import { useQuery } from '@apollo/client/react';
 import { useTranslation } from 'react-i18next';
 import { APP_INFO_QUERY } from '../graphql/app';
+import { useAppTheme } from '../theme/app-theme';
 
 type AppInfoQueryData = {
   appInfo?: {
@@ -29,17 +30,27 @@ const metricKeys = [
 export function DashboardPage() {
   const { t } = useTranslation();
   const { data } = useQuery<AppInfoQueryData>(APP_INFO_QUERY);
+  const { palette } = useAppTheme();
 
   return (
     <Stack gap={6}>
       <Box>
-        <Badge colorPalette="teal" variant="solid" px={3} py={1} borderRadius="full">
+        <Badge
+          bg={palette.accentSoft}
+          color={palette.accentText}
+          variant="subtle"
+          px={3}
+          py={1}
+          borderRadius="full"
+          borderWidth="1px"
+          borderColor={palette.border}
+        >
           {t('dashboard.badge')}
         </Badge>
         <Heading size="xl" mt={4}>
           {data?.appInfo?.name ?? t('brand.name')}
         </Heading>
-        <Text color="whiteAlpha.700" mt={2} maxW="2xl">
+        <Text color={palette.mutedText} mt={2} maxW="2xl">
           {data?.appInfo?.tagline ?? t('brand.taglineFallback')}
         </Text>
       </Box>
@@ -51,16 +62,17 @@ export function DashboardPage() {
             p={5}
             borderRadius="2xl"
             borderWidth="1px"
-            borderColor="whiteAlpha.200"
-            bg="whiteAlpha.50"
+            borderColor={palette.border}
+            bg={palette.surface}
+            boxShadow={palette.shadow}
           >
-            <Text color="whiteAlpha.700" fontSize="sm" textTransform="uppercase" letterSpacing="0.16em">
+            <Text color={palette.mutedText} fontSize="sm" textTransform="uppercase" letterSpacing="0.16em">
               {t(`dashboard.metrics.${metric.key}.label`)}
             </Text>
             <Heading size="lg" mt={3}>
               {'valueKey' in metric ? t(metric.valueKey) : metric.value}
             </Heading>
-            <Text color="whiteAlpha.700" mt={2}>
+            <Text color={palette.mutedText} mt={2}>
               {t(`dashboard.metrics.${metric.key}.detail`)}
             </Text>
           </Box>
@@ -72,11 +84,12 @@ export function DashboardPage() {
           p={5}
           borderRadius="2xl"
           borderWidth="1px"
-          borderColor="whiteAlpha.200"
-          bg="rgba(12, 18, 31, 0.92)"
+          borderColor={palette.border}
+          bg={palette.surface}
+          boxShadow={palette.shadow}
         >
           <Text fontWeight="600">{t('dashboard.nextSteps.title')}</Text>
-          <Text color="whiteAlpha.700" mt={2}>
+          <Text color={palette.mutedText} mt={2}>
             {t('dashboard.nextSteps.body')}
           </Text>
         </Box>
@@ -85,14 +98,15 @@ export function DashboardPage() {
           p={5}
           borderRadius="2xl"
           borderWidth="1px"
-          borderColor="whiteAlpha.200"
-          bg="rgba(12, 18, 31, 0.92)"
+          borderColor={palette.border}
+          bg={palette.surface}
+          boxShadow={palette.shadow}
         >
           <Text fontWeight="600">{t('dashboard.googleAuth.title')}</Text>
-          <Text color="whiteAlpha.700" mt={2}>
+          <Text color={palette.mutedText} mt={2}>
             {t('dashboard.googleAuth.body')}
           </Text>
-          <Button mt={4} bg="teal.400" color="gray.950">
+          <Button mt={4} bg={palette.accent} color={palette.accentText}>
             {t('dashboard.googleAuth.cta')}
           </Button>
         </Box>
