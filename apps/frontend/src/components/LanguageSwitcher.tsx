@@ -1,7 +1,7 @@
 import { HStack, SegmentGroup, Text } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { supportedLanguages, type SupportedLanguage } from '../i18n';
+import { isLanguageToggleEnabled, supportedLanguages, type SupportedLanguage } from '../i18n';
 import { useAppTheme } from '../theme/app-theme';
 
 type LanguageSwitcherProps = {
@@ -19,7 +19,7 @@ function resolveLanguage(language: string): SupportedLanguage {
     return base as SupportedLanguage;
   }
 
-  return 'en';
+  return 'es';
 }
 
 export function LanguageSwitcher({ size = 'sm', showLabel = false }: LanguageSwitcherProps) {
@@ -36,6 +36,10 @@ export function LanguageSwitcher({ size = 'sm', showLabel = false }: LanguageSwi
   );
 
   const value = resolveLanguage(i18n.language);
+
+  if (!isLanguageToggleEnabled) {
+    return null;
+  }
 
   return (
     <HStack gap={3} align="center">

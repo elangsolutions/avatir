@@ -10,7 +10,7 @@ type ThemeSwitcherProps = {
 
 export function ThemeSwitcher({ size = 'sm', showLabel = false }: ThemeSwitcherProps) {
   const { t } = useTranslation();
-  const { mode, setMode, palette } = useAppTheme();
+  const { mode, setMode, palette, isToggleEnabled } = useAppTheme();
 
   const items = useMemo(
     () =>
@@ -20,6 +20,10 @@ export function ThemeSwitcher({ size = 'sm', showLabel = false }: ThemeSwitcherP
       })),
     [t],
   );
+
+  if (!isToggleEnabled) {
+    return null;
+  }
 
   return (
     <HStack gap={3} align="center">

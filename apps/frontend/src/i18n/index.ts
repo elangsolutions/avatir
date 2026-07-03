@@ -8,6 +8,8 @@ export type SupportedLanguage = (typeof supportedLanguages)[number];
 
 const STORAGE_KEY = 'avatir.language';
 
+export const isLanguageToggleEnabled = import.meta.env.VITE_ENABLE_LANGUAGE_TOGGLE === 'true';
+
 function syncDocumentLanguage(language: string) {
   document.documentElement.lang = language;
   document.title = i18n.t('meta.title');
@@ -17,11 +19,13 @@ function syncDocumentLanguage(language: string) {
   }
 }
 
-const savedLanguage = localStorage.getItem(STORAGE_KEY);
+const DEFAULT_LANGUAGE: SupportedLanguage = 'es';
+
+const savedLanguage = isLanguageToggleEnabled ? localStorage.getItem(STORAGE_KEY) : null;
 const initialLanguage =
   savedLanguage && supportedLanguages.includes(savedLanguage as SupportedLanguage)
     ? savedLanguage
-    : 'en';
+    : DEFAULT_LANGUAGE;
 
 void i18n.use(initReactI18next).init({
   resources: {
@@ -36,7 +40,9 @@ void i18n.use(initReactI18next).init({
 });
 
 i18n.on('languageChanged', (language) => {
-  localStorage.setItem(STORAGE_KEY, language);
+  if (isLanguageToggleEnabled) {
+    localStorage.setItem(STORAGE_KEY, language);
+  }
   syncDocumentLanguage(language);
 });
 

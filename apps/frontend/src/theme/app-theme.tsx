@@ -26,6 +26,8 @@ export type ThemePalette = {
 
 const STORAGE_KEY = 'avatir.theme';
 
+export const isThemeToggleEnabled = import.meta.env.VITE_ENABLE_THEME_TOGGLE === 'true';
+
 const palettes: Record<AppThemeMode, ThemePalette> = {
   light: {
     pageBg: '#F7F8FC',
@@ -78,13 +80,16 @@ type AppThemeContextValue = {
   palette: ThemePalette;
   setMode: (mode: AppThemeMode) => void;
   toggleMode: () => void;
+  isToggleEnabled: boolean;
 };
 
 const AppThemeContext = createContext<AppThemeContextValue | null>(null);
 
+const DEFAULT_MODE: AppThemeMode = 'light';
+
 function resolveInitialMode(): AppThemeMode {
-  if (typeof window === 'undefined') {
-    return 'light';
+  if (!isThemeToggleEnabled || typeof window === 'undefined') {
+    return DEFAULT_MODE;
   }
 
   const saved = window.localStorage.getItem(STORAGE_KEY);
@@ -92,17 +97,19 @@ function resolveInitialMode(): AppThemeMode {
     return saved;
   }
 
-  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
-  return prefersDark ? 'dark' : 'light';
+  return DEFAULT_MODE;
 }
 
 export function AppThemeProvider({ children }: { children: ReactNode }) {
   const [mode, setModeState] = useState<AppThemeMode>(resolveInitialMode);
 
   useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, mode);
     document.documentElement.dataset.theme = mode;
     document.documentElement.style.colorScheme = mode;
+
+    if (isThemeToggleEnabled) {
+      window.localStorage.setItem(STORAGE_KEY, mode);
+    }
   }, [mode]);
 
   const value = useMemo<AppThemeContextValue>(
@@ -111,8 +118,17 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
       isLight: mode === 'light',
       isDark: mode === 'dark',
       palette: palettes[mode],
-      setMode: setModeState,
-      toggleMode: () => setModeState((current) => (current === 'light' ? 'dark' : 'light')),
+      setMode: (next) => {
+        if (isThemeToggleEnabled) {
+          setModeState(next);
+        }
+      },
+      toggleMode: () => {
+        if (isThemeToggleEnabled) {
+          setModeState((current) => (current === 'light' ? 'dark' : 'light'));
+        }
+      },
+      isToggleEnabled: isThemeToggleEnabled,
     }),
     [mode],
   );
