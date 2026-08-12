@@ -7,7 +7,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const corsOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:3600')
+  const corsOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:5173')
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean);
@@ -25,7 +25,7 @@ async function bootstrap() {
     }),
   );
 
-  const port = Number(process.env.PORT ?? 3601);
+  const port = Number(process.env.PORT ?? 3001);
   await app.listen(port);
 }
 

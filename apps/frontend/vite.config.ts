@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react({})],
     server: {
-      port: Number(env.FRONTEND_PORT ?? 3600),
+      port: Number(env.FRONTEND_PORT ?? 5173),
       // The backend CORS allowlist is pinned to this port, so fail loudly
       // instead of silently falling back to the next free one.
       strictPort: true,

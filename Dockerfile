@@ -24,6 +24,6 @@ COPY --from=build /app/apps/backend/package.json ./apps/backend/package.json
 COPY --from=build /app/apps/frontend/package.json ./apps/frontend/package.json
 COPY package.json package-lock.json* ./
 
-EXPOSE 3600 3601
+EXPOSE 3000 5173
 
 CMD ["npm", "run", "dev"]
