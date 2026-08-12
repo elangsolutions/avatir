@@ -5,6 +5,8 @@ import { AgreementsPage } from './pages/AgreementsPage';
 import { AuthPage } from './pages/AuthPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { LandingPage } from './pages/LandingPage';
+import { ProductsPage } from './pages/ProductsPage';
+import { SimulateCaucionPage } from './pages/SimulateCaucionPage';
 import { UsersPage } from './pages/UsersPage';
 import { useAppTheme } from './theme/app-theme';
 
@@ -19,6 +21,8 @@ export function App() {
         <Route path="/app" element={<AppShell />}>
           <Route index element={<DashboardPage />} />
           <Route path="users" element={<UsersPage />} />
+          <Route path="products" element={<ProductsPage />} />
+          <Route path="products/caucion/simulate" element={<SimulateCaucionPage />} />
           <Route path="agreements" element={<AgreementsPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />

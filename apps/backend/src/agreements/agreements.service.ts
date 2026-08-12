@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { AgreementStatus, Prisma } from '../../generated/prisma';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAgreementInput, UpdateAgreementInput } from './agreements.types';
@@ -40,6 +40,10 @@ export class AgreementsService {
   }
 
   create(input: CreateAgreementInput) {
+    if (typeof input.amount !== 'number' || Number.isNaN(input.amount)) {
+      throw new BadRequestException('Agreement amount is required');
+    }
+
     return this.prisma.agreement.create({
       data: {
         title: input.title,

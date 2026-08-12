@@ -8,6 +8,7 @@ import { useAppTheme } from '../theme/app-theme';
 const navItems = [
   { labelKey: 'nav.dashboard', path: '/app' },
   { labelKey: 'nav.users', path: '/app/users' },
+  { labelKey: 'nav.products', path: '/app/products' },
   { labelKey: 'nav.agreements', path: '/app/agreements' },
 ] as const;
 
@@ -44,7 +45,10 @@ export function AppShell() {
 
           <Stack gap={2}>
             {navItems.map((item) => {
-              const active = location.pathname === item.path;
+              const active =
+                item.path === '/app'
+                  ? location.pathname === '/app'
+                  : location.pathname === item.path || location.pathname.startsWith(`${item.path}/`);
               return (
                 <Button
                   key={item.path}
@@ -122,7 +126,10 @@ export function AppShell() {
 
               <HStack gap={2} overflowX="auto" display={{ base: 'flex', md: 'none' }}>
                 {navItems.map((item) => {
-                  const active = location.pathname === item.path;
+                  const active =
+                    item.path === '/app'
+                      ? location.pathname === '/app'
+                      : location.pathname === item.path || location.pathname.startsWith(`${item.path}/`);
                   return (
                     <Button
                       key={item.path}
