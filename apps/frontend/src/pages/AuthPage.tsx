@@ -1,22 +1,30 @@
 import { Box, Button, Container, Flex, Heading, HStack, Input, Stack, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import { ThemeSwitcher } from '../components/ThemeSwitcher';
 import { useAppTheme } from '../theme/app-theme';
 
 type AuthMode = 'sign-in' | 'sign-up';
 
+function resolveNextPath(next: string | null) {
+  if (!next || !next.startsWith('/app')) {
+    return '/app';
+  }
+  return next;
+}
+
 export function AuthPage() {
   const { t } = useTranslation();
   const [mode, setMode] = useState<AuthMode>('sign-in');
   const [googleClicked, setGoogleClicked] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { palette } = useAppTheme();
 
   const handleContinue = () => {
-    navigate('/app');
+    navigate(resolveNextPath(searchParams.get('next')));
   };
 
   return (
