@@ -7,6 +7,7 @@ import { apolloClient } from './apollo';
 import { ApolloProvider } from '@apollo/client/react';
 import './i18n';
 import { AppThemeProvider } from './theme/app-theme';
+import { AuthProvider } from './auth/AuthContext';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <AppThemeProvider>
         <ApolloProvider client={apolloClient}>
           <BrowserRouter>
-            <App />
+            <AuthProvider>
+              <App />
+            </AuthProvider>
           </BrowserRouter>
         </ApolloProvider>
       </AppThemeProvider>

@@ -21,7 +21,13 @@
     "crudArea": "Área CRUD",
     "language": "Idioma",
     "theme": "Tema",
-    "backToHome": "Volver al inicio"
+    "backToHome": "Volver al inicio",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "loading": "Cargando…",
+    "empty": "Aún no hay datos."
   },
   "language": {
     "en": "English",
@@ -90,18 +96,43 @@
     "createAccountCta": "Crear cuenta",
     "continueWithGoogle": "Continuar con Google",
     "googleReady": "El inicio de sesión con Google estará disponible en una versión posterior.",
-    "googlePending": "El inicio de sesión con Google se conectará cuando se configuren las credenciales OAuth."
+    "googlePending": "El inicio de sesión con Google se conectará cuando se configuren las credenciales OAuth.",
+    "errorGeneric": "No se pudo iniciar sesión. Intentá de nuevo.",
+    "demoTitle": "Cuentas de demostración",
+    "demoBody": "Usá admin@avatir.com, agent@avatir.com o client@avatir.com con la contraseña password123.",
+    "passwordHint": "Usá al menos 8 caracteres.",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetTitle": "Restablecé tu contraseña",
+    "resetDescription": "Ingresá tu correo y te enviaremos un enlace para elegir una nueva contraseña.",
+    "sendResetLink": "Enviar enlace",
+    "resetSent": "Si ese correo está registrado, enviamos un enlace para restablecer la contraseña.",
+    "backToSignIn": "Volver a iniciar sesión",
+    "openEmailLink": "Abrir enlace del correo",
+    "verificationSent": "Si ese correo necesita verificación, enviamos un nuevo enlace.",
+    "resendVerification": "Reenviar correo de verificación",
+    "choosePasswordTitle": "Elegí una nueva contraseña",
+    "choosePasswordDescription": "Ingresá una nueva contraseña para tu cuenta de AVATIR.",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "passwordMismatch": "Las contraseñas no coinciden.",
+    "savePassword": "Guardar contraseña",
+    "resetSuccess": "Tu contraseña se actualizó. Ya podés iniciar sesión.",
+    "resetInvalid": "Este enlace de restablecimiento no es válido o venció.",
+    "verifyTitle": "Verificá tu correo",
+    "verifyPending": "Confirmando tu correo electrónico…",
+    "verifySuccess": "Tu correo está verificado. Podés continuar al espacio de trabajo.",
+    "verifyInvalid": "Este enlace de verificación no es válido o venció."
   },
   "dashboard": {
     "badge": "Resumen del espacio de trabajo",
     "metrics": {
       "activeUsers": {
         "label": "Usuarios activos",
-        "detail": "Listo para conectar CRUD"
+        "detail": "Según tu rol de caución"
       },
       "agreements": {
         "label": "Acuerdos",
-        "detail": "Flujo mobile-first planificado"
+        "detail": "Registros visibles para este rol"
       },
       "googleAuth": {
         "label": "Auth de Google",
@@ -110,8 +141,8 @@
       }
     },
     "nextSteps": {
-      "title": "Próximos pasos",
-      "body": "Agrega flujos de listado, creación, edición y detalle para usuarios y acuerdos. La interfaz ya es mobile-first y está lista para datos."
+      "title": "Acceso por rol",
+      "body": "ADMIN gestiona usuarios y acuerdos. AGENT puede crear acuerdos. CLIENT solo ve los acuerdos asignados a su cuenta."
     },
     "googleAuth": {
       "title": "Auth de Google",
@@ -121,27 +152,49 @@
   },
   "users": {
     "title": "Usuarios",
-    "description": "Esta es la primera vista placeholder para el flujo de gestión de usuarios.",
+    "description": "Creá y administrá usuarios de la plataforma con roles ADMIN, AGENT y CLIENT.",
     "addUser": "Agregar usuario",
+    "editUser": "Editar usuario",
+    "adminOnly": "Solo los administradores pueden gestionar usuarios.",
+    "role": "Rol",
+    "passwordOptional": "Contraseña (dejala vacía para mantener la actual)",
+    "empty": "Todavía no hay usuarios.",
+    "confirmDelete": "¿Eliminar a {{name}}?",
+    "errorSave": "No se pudo guardar este usuario.",
+    "errorDelete": "No se pudo eliminar este usuario.",
     "roles": {
-      "admin": "Administrador",
-      "reviewer": "Revisor",
-      "operator": "Operador"
+      "ADMIN": "Administrador",
+      "AGENT": "Agente",
+      "CLIENT": "Cliente"
     }
   },
   "agreements": {
     "title": "Acuerdos",
-    "description": "Esta vista placeholder ofrece un punto de partida limpio para el flujo de acuerdos.",
+    "description": "Creá y administrá acuerdos de caución para clientes.",
+    "clientDescription": "Estos son los acuerdos asignados a tu cuenta.",
+    "clientHint": "Podés ver tus acuerdos. La creación está reservada para agentes y administradores.",
+    "agentHint": "Los agentes pueden crear acuerdos. Los administradores también pueden editarlos y eliminarlos.",
     "addAgreement": "Agregar acuerdo",
+    "editAgreement": "Editar acuerdo",
+    "empty": "No hay acuerdos para mostrar con este rol.",
+    "confirmDelete": "¿Eliminar {{title}}?",
+    "errorSave": "No se pudo guardar este acuerdo.",
+    "errorDelete": "No se pudo eliminar este acuerdo.",
+    "errorInvalid": "El título, el cliente y un importe válido son obligatorios.",
+    "fields": {
+      "title": "Título",
+      "client": "Cliente",
+      "clientPlaceholder": "Seleccioná un usuario CLIENT",
+      "amount": "Importe",
+      "currency": "Moneda",
+      "status": "Estado",
+      "notes": "Notas"
+    },
     "statuses": {
       "active": "Activo",
       "draft": "Borrador",
-      "paused": "Pausado"
-    },
-    "mock": {
-      "primaryServicing": "Servicio principal",
-      "reviewCycle": "Ciclo de revisión",
-      "renewalPlan": "Plan de renovación"
+      "paused": "Pausado",
+      "closed": "Cerrado"
     }
   }
 }

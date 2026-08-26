@@ -21,7 +21,13 @@
     "crudArea": "CRUD area",
     "language": "Language",
     "theme": "Theme",
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading…",
+    "empty": "Nothing to show yet."
   },
   "language": {
     "en": "English",
@@ -90,18 +96,43 @@
     "createAccountCta": "Create account",
     "continueWithGoogle": "Continue with Google",
     "googleReady": "Google sign-in will be available in a later release.",
-    "googlePending": "Google sign-in will be connected once OAuth credentials are configured."
+    "googlePending": "Google sign-in will be connected once OAuth credentials are configured.",
+    "errorGeneric": "Could not sign in. Please try again.",
+    "demoTitle": "Demo accounts",
+    "demoBody": "Use admin@avatir.com, agent@avatir.com, or client@avatir.com with password password123.",
+    "passwordHint": "Use at least 8 characters.",
+    "forgotPassword": "Forgot password?",
+    "resetTitle": "Reset your password",
+    "resetDescription": "Enter your email and we will send a link to choose a new password.",
+    "sendResetLink": "Send reset link",
+    "resetSent": "If that email is registered, we sent a password reset link.",
+    "backToSignIn": "Back to sign in",
+    "openEmailLink": "Open email link",
+    "verificationSent": "If that email needs verification, we sent a new link.",
+    "resendVerification": "Resend verification email",
+    "choosePasswordTitle": "Choose a new password",
+    "choosePasswordDescription": "Enter a new password for your AVATIR account.",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "passwordMismatch": "Passwords do not match.",
+    "savePassword": "Save password",
+    "resetSuccess": "Your password was updated. You can sign in now.",
+    "resetInvalid": "This reset link is invalid or has expired.",
+    "verifyTitle": "Verify your email",
+    "verifyPending": "Confirming your email address…",
+    "verifySuccess": "Your email is verified. You can continue to your workspace.",
+    "verifyInvalid": "This verification link is invalid or has expired."
   },
   "dashboard": {
     "badge": "Workspace overview",
     "metrics": {
       "activeUsers": {
         "label": "Active users",
-        "detail": "Ready for CRUD wiring"
+        "detail": "Scoped by your assurance role"
       },
       "agreements": {
         "label": "Agreements",
-        "detail": "Mobile-ready flow planned"
+        "detail": "Visible records for this role"
       },
       "googleAuth": {
         "label": "Google auth",
@@ -110,8 +141,8 @@
       }
     },
     "nextSteps": {
-      "title": "Next steps",
-      "body": "Add list, create, edit, and detail flows for users and agreements. The shell is already mobile-first and ready for data."
+      "title": "Role access",
+      "body": "ADMIN manages users and agreements. AGENT can create agreements. CLIENT only sees agreements assigned to their account."
     },
     "googleAuth": {
       "title": "Google auth",
@@ -121,27 +152,49 @@
   },
   "users": {
     "title": "Users",
-    "description": "This is the first placeholder view for the users management flow.",
+    "description": "Create and manage platform users with ADMIN, AGENT, and CLIENT roles.",
     "addUser": "Add user",
+    "editUser": "Edit user",
+    "adminOnly": "Only administrators can manage users.",
+    "role": "Role",
+    "passwordOptional": "Password (leave blank to keep current)",
+    "empty": "No users yet.",
+    "confirmDelete": "Delete {{name}}?",
+    "errorSave": "Could not save this user.",
+    "errorDelete": "Could not delete this user.",
     "roles": {
-      "admin": "Admin",
-      "reviewer": "Reviewer",
-      "operator": "Operator"
+      "ADMIN": "Admin",
+      "AGENT": "Agent",
+      "CLIENT": "Client"
     }
   },
   "agreements": {
     "title": "Agreements",
-    "description": "This placeholder view gives the agreements workflow a clean starting point.",
+    "description": "Create and manage surety agreements for clients.",
+    "clientDescription": "These are the agreements assigned to your account.",
+    "clientHint": "You can view your agreements. Creation is reserved for agents and admins.",
+    "agentHint": "Agents can create agreements. Admins can also edit and delete them.",
     "addAgreement": "Add agreement",
+    "editAgreement": "Edit agreement",
+    "empty": "No agreements to show for this role.",
+    "confirmDelete": "Delete {{title}}?",
+    "errorSave": "Could not save this agreement.",
+    "errorDelete": "Could not delete this agreement.",
+    "errorInvalid": "Title, client, and a valid amount are required.",
+    "fields": {
+      "title": "Title",
+      "client": "Client",
+      "clientPlaceholder": "Select a CLIENT user",
+      "amount": "Amount",
+      "currency": "Currency",
+      "status": "Status",
+      "notes": "Notes"
+    },
     "statuses": {
       "active": "Active",
       "draft": "Draft",
-      "paused": "Paused"
-    },
-    "mock": {
-      "primaryServicing": "Primary servicing",
-      "reviewCycle": "Review cycle",
-      "renewalPlan": "Renewal plan"
+      "paused": "Paused",
+      "closed": "Closed"
     }
   }
 }
