@@ -12,6 +12,7 @@ import {
   Text,
   Wrap,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
@@ -45,6 +46,12 @@ export function LandingPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { palette } = useAppTheme();
+  const [activeTab, setActiveTab] = useState('about');
+
+  const openProducts = () => {
+    setActiveTab('products');
+    document.getElementById('landing-tabs')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <Box minH="100vh" bg={palette.pageBg} color={palette.text}>
@@ -141,9 +148,7 @@ export function LandingPage() {
                   borderColor="whiteAlpha.600"
                   color="white"
                   _hover={{ bg: 'whiteAlpha.200' }}
-                  onClick={() => {
-                    document.getElementById('landing-tabs')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  onClick={openProducts}
                 >
                   {t('landing.hero.secondaryCta')}
                 </Button>
@@ -156,7 +161,8 @@ export function LandingPage() {
       <Container maxW="7xl" px={{ base: 4, md: 8 }} py={{ base: 10, md: 16 }}>
         <Box id="landing-tabs">
           <Tabs.Root
-            defaultValue="about"
+            value={activeTab}
+            onValueChange={(details) => setActiveTab(details.value)}
             variant="plain"
             css={{
               '& [data-part="list"]': {
@@ -213,42 +219,72 @@ export function LandingPage() {
             </Tabs.Content>
 
             <Tabs.Content value="products">
-              <Box
-                mt={8}
-                p={{ base: 5, md: 6 }}
-                borderRadius="2xl"
-                borderWidth="1px"
-                borderColor={palette.border}
-                bg={palette.surfaceElevated}
-                boxShadow={palette.shadow}
-              >
-                <Text fontSize="sm" color={palette.mutedText} textTransform="uppercase" letterSpacing="0.18em">
-                  {t('landing.products.label')}
-                </Text>
-                <Text fontWeight="600" mt={2} fontSize="lg">
-                  {t('landing.products.title')}
-                </Text>
-                <Text color={palette.mutedText} mt={2} lineHeight="1.55" maxW="2xl">
-                  {t('landing.products.detail')}
-                </Text>
-                <Wrap gap={2} mt={4}>
-                  {productModuleKeys.map((key) => (
-                    <Badge
-                      key={key}
-                      bg={palette.accentSoft}
-                      color={palette.accentText}
-                      px={3}
-                      py={1}
-                      borderRadius="full"
-                      fontWeight="500"
-                      borderWidth="1px"
-                      borderColor={palette.border}
-                    >
-                      {t(key)}
-                    </Badge>
-                  ))}
-                </Wrap>
-              </Box>
+              <Stack gap={6} mt={8}>
+                <Box
+                  p={{ base: 5, md: 6 }}
+                  borderRadius="2xl"
+                  borderWidth="1px"
+                  borderColor={palette.border}
+                  bg={palette.surfaceElevated}
+                  boxShadow={palette.shadow}
+                >
+                  <Text fontSize="sm" color={palette.mutedText} textTransform="uppercase" letterSpacing="0.18em">
+                    {t('landing.products.label')}
+                  </Text>
+                  <Text fontWeight="600" mt={2} fontSize="lg">
+                    {t('landing.products.title')}
+                  </Text>
+                  <Text color={palette.mutedText} mt={2} lineHeight="1.55" maxW="2xl">
+                    {t('landing.products.detail')}
+                  </Text>
+                </Box>
+
+                <Box
+                  p={{ base: 5, md: 6 }}
+                  borderRadius="2xl"
+                  borderWidth="1px"
+                  borderColor={palette.border}
+                  bg={palette.surface}
+                  boxShadow={palette.shadow}
+                >
+                  <Heading size="md">{t('landing.products.featured.name')}</Heading>
+                  <Text color={palette.mutedText} mt={3} lineHeight="1.55" maxW="2xl">
+                    {t('landing.products.featured.description')}
+                  </Text>
+                  <Button
+                    mt={5}
+                    bg={palette.accent}
+                    color={palette.accentText}
+                    _hover={{ bg: palette.accentHover }}
+                    onClick={() => navigate('/app/login?next=/app/products/caucion/simulate')}
+                  >
+                    {t('landing.products.featured.simulateCta')}
+                  </Button>
+                </Box>
+
+                <Box>
+                  <Text fontSize="sm" color={palette.mutedText} textTransform="uppercase" letterSpacing="0.18em">
+                    {t('landing.products.modulesLabel')}
+                  </Text>
+                  <Wrap gap={2} mt={4}>
+                    {productModuleKeys.map((key) => (
+                      <Badge
+                        key={key}
+                        bg={palette.accentSoft}
+                        color={palette.accentText}
+                        px={3}
+                        py={1}
+                        borderRadius="full"
+                        fontWeight="500"
+                        borderWidth="1px"
+                        borderColor={palette.border}
+                      >
+                        {t(key)}
+                      </Badge>
+                    ))}
+                  </Wrap>
+                </Box>
+              </Stack>
             </Tabs.Content>
           </Tabs.Root>
         </Box>
