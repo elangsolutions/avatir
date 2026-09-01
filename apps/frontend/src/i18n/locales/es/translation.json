@@ -13,7 +13,6 @@
   "nav": {
     "dashboard": "Panel",
     "users": "Usuarios",
-    "products": "Productos",
     "agreements": "Acuerdos"
   },
   "common": {
@@ -22,7 +21,13 @@
     "crudArea": "Área CRUD",
     "language": "Idioma",
     "theme": "Tema",
-    "backToHome": "Volver al inicio"
+    "backToHome": "Volver al inicio",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "loading": "Cargando…",
+    "empty": "Aún no hay datos."
   },
   "language": {
     "en": "English",
@@ -58,15 +63,9 @@
       }
     },
     "products": {
-      "label": "Productos de caución",
-      "title": "Coberturas disponibles para simular y operar",
-      "detail": "Empezá por Seguro de Caución: cargá tomador, beneficiario y monto asegurado para estimar prima y guardar un acuerdo en borrador.",
-      "featured": {
-        "name": "Seguro de Caución",
-        "description": "Garantía contractual frente a incumplimientos. Simulá prima estimada y generá un acuerdo borrador listo para el flujo operativo.",
-        "simulateCta": "Simular acuerdo"
-      },
-      "modulesLabel": "Alcance MVP de la plataforma",
+      "label": "Alcance MVP",
+      "title": "Pensado para el flujo principal de negocio",
+      "detail": "La primera versión cubre la operatoria de punta a punta sin integraciones complejas en tiempo real con aseguradoras. El equipo de operaciones puede trabajar de forma asistida hoy; portales e integraciones llegan en fases posteriores.",
       "modules": {
         "users": "Usuarios y permisos",
         "producers": "Productores y empresas",
@@ -97,18 +96,43 @@
     "createAccountCta": "Crear cuenta",
     "continueWithGoogle": "Continuar con Google",
     "googleReady": "El inicio de sesión con Google estará disponible en una versión posterior.",
-    "googlePending": "El inicio de sesión con Google se conectará cuando se configuren las credenciales OAuth."
+    "googlePending": "El inicio de sesión con Google se conectará cuando se configuren las credenciales OAuth.",
+    "errorGeneric": "No se pudo iniciar sesión. Intentá de nuevo.",
+    "demoTitle": "Cuentas de demostración",
+    "demoBody": "Usá admin@avatir.com, agent@avatir.com o client@avatir.com con la contraseña password123.",
+    "passwordHint": "Usá al menos 8 caracteres.",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "resetTitle": "Restablecé tu contraseña",
+    "resetDescription": "Ingresá tu correo y te enviaremos un enlace para elegir una nueva contraseña.",
+    "sendResetLink": "Enviar enlace",
+    "resetSent": "Si ese correo está registrado, enviamos un enlace para restablecer la contraseña.",
+    "backToSignIn": "Volver a iniciar sesión",
+    "openEmailLink": "Abrir enlace del correo",
+    "verificationSent": "Si ese correo necesita verificación, enviamos un nuevo enlace.",
+    "resendVerification": "Reenviar correo de verificación",
+    "choosePasswordTitle": "Elegí una nueva contraseña",
+    "choosePasswordDescription": "Ingresá una nueva contraseña para tu cuenta de AVATIR.",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "passwordMismatch": "Las contraseñas no coinciden.",
+    "savePassword": "Guardar contraseña",
+    "resetSuccess": "Tu contraseña se actualizó. Ya podés iniciar sesión.",
+    "resetInvalid": "Este enlace de restablecimiento no es válido o venció.",
+    "verifyTitle": "Verificá tu correo",
+    "verifyPending": "Confirmando tu correo electrónico…",
+    "verifySuccess": "Tu correo está verificado. Podés continuar al espacio de trabajo.",
+    "verifyInvalid": "Este enlace de verificación no es válido o venció."
   },
   "dashboard": {
     "badge": "Resumen del espacio de trabajo",
     "metrics": {
       "activeUsers": {
         "label": "Usuarios activos",
-        "detail": "Listo para conectar CRUD"
+        "detail": "Según tu rol de caución"
       },
       "agreements": {
         "label": "Acuerdos",
-        "detail": "Flujo mobile-first planificado"
+        "detail": "Registros visibles para este rol"
       },
       "googleAuth": {
         "label": "Auth de Google",
@@ -117,8 +141,8 @@
       }
     },
     "nextSteps": {
-      "title": "Próximos pasos",
-      "body": "Agrega flujos de listado, creación, edición y detalle para usuarios y acuerdos. La interfaz ya es mobile-first y está lista para datos."
+      "title": "Acceso por rol",
+      "body": "ADMIN gestiona usuarios y acuerdos. AGENT puede crear acuerdos. CLIENT solo ve los acuerdos asignados a su cuenta."
     },
     "googleAuth": {
       "title": "Auth de Google",
@@ -128,123 +152,49 @@
   },
   "users": {
     "title": "Usuarios",
-    "description": "Esta es la primera vista placeholder para el flujo de gestión de usuarios.",
+    "description": "Creá y administrá usuarios de la plataforma con roles ADMIN, AGENT y CLIENT.",
     "addUser": "Agregar usuario",
+    "editUser": "Editar usuario",
+    "adminOnly": "Solo los administradores pueden gestionar usuarios.",
+    "role": "Rol",
+    "passwordOptional": "Contraseña (dejala vacía para mantener la actual)",
+    "empty": "Todavía no hay usuarios.",
+    "confirmDelete": "¿Eliminar a {{name}}?",
+    "errorSave": "No se pudo guardar este usuario.",
+    "errorDelete": "No se pudo eliminar este usuario.",
     "roles": {
-      "admin": "Administrador",
-      "reviewer": "Revisor",
-      "operator": "Operador"
+      "ADMIN": "Administrador",
+      "AGENT": "Agente",
+      "CLIENT": "Cliente"
     }
   },
   "agreements": {
     "title": "Acuerdos",
-    "description": "Acuerdos de caución simulados y operativos. Creá uno nuevo desde Productos → Seguro de Caución.",
-    "addAgreement": "Simular caución",
-    "empty": "Todavía no hay acuerdos. Simulá un Seguro de Caución para crear el primero.",
-    "loadError": "No se pudieron cargar los acuerdos. Revisá que el backend esté en marcha.",
+    "description": "Creá y administrá acuerdos de caución para clientes.",
+    "clientDescription": "Estos son los acuerdos asignados a tu cuenta.",
+    "clientHint": "Podés ver tus acuerdos. La creación está reservada para agentes y administradores.",
+    "agentHint": "Los agentes pueden crear acuerdos. Los administradores también pueden editarlos y eliminarlos.",
+    "addAgreement": "Agregar acuerdo",
+    "editAgreement": "Editar acuerdo",
+    "empty": "No hay acuerdos para mostrar con este rol.",
+    "confirmDelete": "¿Eliminar {{title}}?",
+    "errorSave": "No se pudo guardar este acuerdo.",
+    "errorDelete": "No se pudo eliminar este acuerdo.",
+    "errorInvalid": "El título, el cliente y un importe válido son obligatorios.",
+    "fields": {
+      "title": "Título",
+      "client": "Cliente",
+      "clientPlaceholder": "Seleccioná un usuario CLIENT",
+      "amount": "Importe",
+      "currency": "Moneda",
+      "status": "Estado",
+      "notes": "Notas"
+    },
     "statuses": {
       "active": "Activo",
       "draft": "Borrador",
       "paused": "Pausado",
       "closed": "Cerrado"
-    },
-    "mock": {
-      "primaryServicing": "Servicio principal",
-      "reviewCycle": "Ciclo de revisión",
-      "renewalPlan": "Plan de renovación"
-    }
-  },
-  "products": {
-    "title": "Productos",
-    "description": "Catálogo de coberturas disponibles para simular y gestionar acuerdos.",
-    "badge": "Catálogo",
-    "caucion": {
-      "name": "Seguro de Caución",
-      "description": "Garantía contractual para obras, servicios y obligaciones frente a un beneficiario.",
-      "simulateCta": "Simular acuerdo"
-    }
-  },
-  "simulateCaucion": {
-    "badge": "Simulación",
-    "title": "Simular Seguro de Caución",
-    "description": "Completá los datos del tomador y la cobertura para estimar la prima y guardar un acuerdo en borrador.",
-    "backToProducts": "Volver a productos",
-    "fields": {
-      "clientName": "Tomador / cliente",
-      "clientNamePlaceholder": "Constructora Río Norte S.A.",
-      "beneficiary": "Beneficiario",
-      "beneficiaryPlaceholder": "Municipalidad de Córdoba",
-      "coverageAmount": "Monto asegurado",
-      "coverageAmountPlaceholder": "5000000",
-      "termMonths": "Plazo (meses)",
-      "termMonthsPlaceholder": "12",
-      "riskType": "Tipo de caución",
-      "notes": "Observaciones",
-      "notesPlaceholder": "Objeto del contrato, número de licitación, etc."
-    },
-    "riskTypes": {
-      "contractual": "Contractual / obra",
-      "customs": "Aduanera",
-      "judicial": "Judicial",
-      "rental": "Alquiler"
-    },
-    "result": {
-      "title": "Resultado de la simulación",
-      "coverage": "Monto asegurado",
-      "premium": "Prima estimada",
-      "rate": "Tasa aplicada",
-      "term": "Plazo",
-      "termValue": "{{count}} meses",
-      "currency": "ARS"
-    },
-    "actions": {
-      "simulate": "Calcular prima",
-      "saveDraft": "Guardar acuerdo borrador",
-      "saving": "Guardando…",
-      "downloadContract": "Descargar contrato PDF",
-      "viewAgreements": "Ver acuerdos",
-      "newSimulation": "Nueva simulación"
-    },
-    "contract": {
-      "title": "CONTRATO MODELO DE SEGURO DE CAUCIÓN",
-      "subtitle": "Documento plantilla generado a partir de la simulación en AVATIR. No constituye póliza emitida ni cobertura vigente hasta su aprobación y emisión formal.",
-      "partiesHeading": "1. Partes",
-      "obligor": "Tomador",
-      "beneficiary": "Beneficiario",
-      "insurer": "Aseguradora",
-      "insurerValue": "Aseguradora a designar / AVATIR (simulación)",
-      "coverageHeading": "2. Cobertura simulada",
-      "product": "Producto",
-      "productValue": "Seguro de Caución",
-      "bondType": "Tipo de caución",
-      "coverageAmount": "Monto asegurado",
-      "premium": "Prima estimada",
-      "rate": "Tasa anual aplicada",
-      "term": "Plazo de vigencia",
-      "objectHeading": "3. Objeto",
-      "objectBody": "El presente contrato modelo tiene por objeto garantizar el cumplimiento de las obligaciones del Tomador frente al Beneficiario, en los términos de la caución simulada y conforme a las condiciones particulares que se acuerden en la emisión definitiva.",
-      "clausesHeading": "4. Cláusulas generales",
-      "clauses": {
-        "scope": "La garantía se limita al monto asegurado indicado y al tipo de caución seleccionado en la simulación.",
-        "premium": "La prima estimada es orientativa y podrá ajustarse según evaluación de riesgo, documentación y condiciones de emisión.",
-        "term": "La vigencia comienza y finaliza según las fechas que se establezcan en la póliza definitiva, tomando como referencia el plazo simulado.",
-        "claims": "Ante un siniestro, el Beneficiario deberá notificar el incumplimiento conforme al procedimiento que fije la póliza emitida.",
-        "nonBinding": "Este documento es una plantilla de simulación y no genera derechos ni obligaciones hasta la emisión formal de la póliza."
-      },
-      "signaturesHeading": "5. Firmas",
-      "signatureObligor": "Tomador",
-      "signatureBeneficiary": "Beneficiario",
-      "signatureInsurer": "Aseguradora",
-      "disclaimer": "AVATIR genera esta plantilla solo con fines operativos y de cotización. La emisión definitiva requiere revisión, aprobación y documentación completa.",
-      "generatedOn": "Generado el {{date}}",
-      "filename": "contrato-caucion"
-    },
-    "errors": {
-      "required": "Completá tomador, beneficiario y un monto válido.",
-      "saveFailed": "No se pudo guardar el acuerdo. Revisá que el backend esté en marcha."
-    },
-    "success": {
-      "saved": "Acuerdo de caución guardado como borrador."
     }
   }
 }

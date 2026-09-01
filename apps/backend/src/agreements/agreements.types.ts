@@ -1,5 +1,6 @@
 import { Field, Float, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, Min, MinLength } from 'class-validator';
+import { AgreementStatus } from '../../generated/prisma';
 
 @ObjectType()
 export class Agreement {
@@ -27,6 +28,9 @@ export class Agreement {
   @Field(() => String, { nullable: true })
   ownerId?: string | null;
 
+  @Field(() => String, { nullable: true })
+  agentId?: string | null;
+
   @Field()
   createdAt!: Date;
 
@@ -37,11 +41,11 @@ export class Agreement {
 @InputType()
 export class CreateAgreementInput {
   @Field()
-  @IsString()
+  @MinLength(1)
   title!: string;
 
   @Field()
-  @IsString()
+  @MinLength(1)
   clientName!: string;
 
   @Field(() => Float)
@@ -51,22 +55,19 @@ export class CreateAgreementInput {
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
   currency?: string;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
+  @IsEnum(AgreementStatus)
   status?: string;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
   notes?: string;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
   ownerId?: string;
 }
 
@@ -74,12 +75,12 @@ export class CreateAgreementInput {
 export class UpdateAgreementInput {
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
+  @MinLength(1)
   title?: string;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
+  @MinLength(1)
   clientName?: string;
 
   @Field(() => Float, { nullable: true })
@@ -90,21 +91,18 @@ export class UpdateAgreementInput {
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
   currency?: string;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
+  @IsEnum(AgreementStatus)
   status?: string;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
   notes?: string;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
   ownerId?: string;
 }

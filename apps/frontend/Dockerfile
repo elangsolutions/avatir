@@ -10,7 +10,7 @@ RUN yarn install --frozen-lockfile
 
 FROM deps AS build
 COPY . .
-ARG VITE_GRAPHQL_URL=http://localhost:3001/graphql
+ARG VITE_GRAPHQL_URL=http://localhost:5001/graphql
 ENV VITE_GRAPHQL_URL=${VITE_GRAPHQL_URL}
 RUN yarn workspace @avatir/frontend build
 

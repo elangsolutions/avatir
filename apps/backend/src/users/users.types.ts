@@ -1,5 +1,6 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { IsEmail, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsEnum, IsOptional, MinLength } from 'class-validator';
+import { UserRole } from '../auth/roles';
 
 @ObjectType()
 export class User {
@@ -12,8 +13,8 @@ export class User {
   @Field()
   email!: string;
 
-  @Field()
-  role!: string;
+  @Field(() => UserRole)
+  role!: UserRole;
 
   @Field(() => String, { nullable: true })
   avatarUrl?: string | null;
@@ -23,26 +24,32 @@ export class User {
 
   @Field()
   updatedAt!: Date;
+
+  @Field(() => Boolean)
+  emailVerified!: boolean;
 }
 
 @InputType()
 export class CreateUserInput {
   @Field()
-  @IsString()
+  @MinLength(1)
   name!: string;
 
   @Field()
   @IsEmail()
   email!: string;
 
-  @Field(() => String, { nullable: true })
+  @Field()
+  @MinLength(8)
+  password!: string;
+
+  @Field(() => UserRole, { nullable: true })
   @IsOptional()
-  @IsString()
-  role?: string;
+  @IsEnum(UserRole)
+  role?: UserRole;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
   avatarUrl?: string;
 }
 
@@ -50,7 +57,7 @@ export class CreateUserInput {
 export class UpdateUserInput {
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
+  @MinLength(1)
   name?: string;
 
   @Field(() => String, { nullable: true })
@@ -60,11 +67,15 @@ export class UpdateUserInput {
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
-  role?: string;
+  @MinLength(8)
+  password?: string;
+
+  @Field(() => UserRole, { nullable: true })
+  @IsOptional()
+  @IsEnum(UserRole)
+  role?: UserRole;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
   avatarUrl?: string;
 }

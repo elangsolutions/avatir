@@ -18,10 +18,11 @@ RUN yarn workspace @avatir/backend build
 FROM node:24-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
+ENV PORT=5001
 RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/apps/backend/dist ./apps/backend/dist
 COPY --from=build /app/apps/backend/generated ./apps/backend/generated
 COPY --from=build /app/apps/backend/package.json ./apps/backend/package.json
-EXPOSE 3001
+EXPOSE 5001
 CMD ["node", "apps/backend/dist/main"]

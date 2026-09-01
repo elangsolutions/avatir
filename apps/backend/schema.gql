@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type Agreement {
+  agentId: String
   amount: Float!
   clientName: String!
   createdAt: DateTime!
@@ -21,6 +22,11 @@ type AppInfo {
   tagline: String!
 }
 
+type AuthMessage {
+  devLink: String
+  message: String!
+}
+
 type AuthOverview {
   message: String!
   providers: [AuthProvider!]!
@@ -29,6 +35,11 @@ type AuthOverview {
 type AuthProvider {
   enabled: Boolean!
   name: String!
+}
+
+type AuthSession {
+  token: String!
+  user: User!
 }
 
 input CreateAgreementInput {
@@ -45,7 +56,8 @@ input CreateUserInput {
   avatarUrl: String
   email: String!
   name: String!
-  role: String
+  password: String!
+  role: UserRole
 }
 
 """
@@ -53,14 +65,25 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 type Mutation {
   createAgreement(input: CreateAgreementInput!): Agreement!
   createUser(input: CreateUserInput!): User!
   deleteAgreement(id: String!): Boolean!
   deleteUser(id: String!): Boolean!
+  login(input: LoginInput!): AuthSession!
+  register(input: RegisterInput!): AuthMessage!
+  requestPasswordReset(input: RequestEmailInput!): AuthMessage!
+  resendVerificationEmail(input: RequestEmailInput!): AuthMessage!
+  resetPassword(input: ResetPasswordInput!): AuthMessage!
   startGoogleSignIn: AuthOverview!
   updateAgreement(id: String!, input: UpdateAgreementInput!): Agreement!
   updateUser(id: String!, input: UpdateUserInput!): User!
+  verifyEmail(token: String!): AuthSession!
 }
 
 type Query {
@@ -68,8 +91,25 @@ type Query {
   agreements: [Agreement!]!
   appInfo: AppInfo!
   authOverview: AuthOverview!
+  clients: [User!]!
+  me: User!
   user(id: String!): User!
   users: [User!]!
+}
+
+input RegisterInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+input RequestEmailInput {
+  email: String!
+}
+
+input ResetPasswordInput {
+  password: String!
+  token: String!
 }
 
 input UpdateAgreementInput {
@@ -86,15 +126,24 @@ input UpdateUserInput {
   avatarUrl: String
   email: String
   name: String
-  role: String
+  password: String
+  role: UserRole
 }
 
 type User {
   avatarUrl: String
   createdAt: DateTime!
   email: String!
+  emailVerified: Boolean!
   id: ID!
   name: String!
-  role: String!
+  role: UserRole!
   updatedAt: DateTime!
+}
+
+"""Assurance platform access role"""
+enum UserRole {
+  ADMIN
+  AGENT
+  CLIENT
 }

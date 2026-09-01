@@ -1,7 +1,12 @@
 import { Badge, Box, Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import { useQuery } from '@apollo/client/react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/AuthContext';
+import { canManageUsers } from '../auth/permissions';
+import { AGREEMENTS_QUERY } from '../graphql/agreements';
 import { APP_INFO_QUERY } from '../graphql/app';
+import { USERS_QUERY } from '../graphql/users';
 import { useAppTheme } from '../theme/app-theme';
 
 type AppInfoQueryData = {
@@ -12,25 +17,31 @@ type AppInfoQueryData = {
   } | null;
 };
 
-const metricKeys = [
-  {
-    key: 'activeUsers',
-    value: '12',
-  },
-  {
-    key: 'agreements',
-    value: '24',
-  },
-  {
-    key: 'googleAuth',
-    valueKey: 'dashboard.metrics.googleAuth.value',
-  },
-] as const;
-
 export function DashboardPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const { data } = useQuery<AppInfoQueryData>(APP_INFO_QUERY);
+  const { data: agreementsData } = useQuery<{ agreements: unknown[] }>(AGREEMENTS_QUERY);
+  const { data: usersData } = useQuery<{ users: unknown[] }>(USERS_QUERY, {
+    skip: !canManageUsers(user?.role),
+  });
   const { palette } = useAppTheme();
+
+  const metrics = [
+    {
+      key: 'activeUsers',
+      value: canManageUsers(user?.role) ? String(usersData?.users.length ?? 0) : t(`users.roles.${user?.role ?? 'CLIENT'}`),
+    },
+    {
+      key: 'agreements',
+      value: String(agreementsData?.agreements.length ?? 0),
+    },
+    {
+      key: 'googleAuth',
+      valueKey: 'dashboard.metrics.googleAuth.value',
+    },
+  ] as const;
 
   return (
     <Stack gap={6}>
@@ -56,7 +67,7 @@ export function DashboardPage() {
       </Box>
 
       <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
-        {metricKeys.map((metric) => (
+        {metrics.map((metric) => (
           <Box
             key={metric.key}
             p={5}
@@ -106,7 +117,7 @@ export function DashboardPage() {
           <Text color={palette.mutedText} mt={2}>
             {t('dashboard.googleAuth.body')}
           </Text>
-          <Button mt={4} bg={palette.accent} color={palette.accentText}>
+          <Button mt={4} bg={palette.accent} color={palette.accentText} onClick={() => navigate('/app/login')}>
             {t('dashboard.googleAuth.cta')}
           </Button>
         </Box>

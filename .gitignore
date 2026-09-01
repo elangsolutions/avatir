@@ -11,3 +11,5 @@ coverage
 .idea/
 apps/backend/prisma/dev.db
 apps/backend/generated
+apps/backend/.local-admin-password
+apps/backend/.local-email-outbox

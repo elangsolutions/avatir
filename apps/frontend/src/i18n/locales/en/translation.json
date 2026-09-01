@@ -13,7 +13,6 @@
   "nav": {
     "dashboard": "Dashboard",
     "users": "Users",
-    "products": "Products",
     "agreements": "Agreements"
   },
   "common": {
@@ -22,7 +21,13 @@
     "crudArea": "CRUD area",
     "language": "Language",
     "theme": "Theme",
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading…",
+    "empty": "Nothing to show yet."
   },
   "language": {
     "en": "English",
@@ -58,15 +63,9 @@
       }
     },
     "products": {
-      "label": "Surety products",
-      "title": "Coverages ready to simulate and operate",
-      "detail": "Start with Surety Bond Insurance: enter obligor, beneficiary, and coverage amount to estimate premium and save a draft agreement.",
-      "featured": {
-        "name": "Surety Bond Insurance",
-        "description": "Contractual guarantee against non-performance. Simulate an estimated premium and create a draft agreement ready for the operational workflow.",
-        "simulateCta": "Simulate agreement"
-      },
-      "modulesLabel": "Platform MVP scope",
+      "label": "MVP scope",
+      "title": "Built for the core business flow",
+      "detail": "The first release covers the end-to-end operational flow without complex real-time insurer integrations. Operations can work assisted today; insurer portals and APIs come in later phases.",
       "modules": {
         "users": "Users & permissions",
         "producers": "Producers & companies",
@@ -97,18 +96,43 @@
     "createAccountCta": "Create account",
     "continueWithGoogle": "Continue with Google",
     "googleReady": "Google sign-in will be available in a later release.",
-    "googlePending": "Google sign-in will be connected once OAuth credentials are configured."
+    "googlePending": "Google sign-in will be connected once OAuth credentials are configured.",
+    "errorGeneric": "Could not sign in. Please try again.",
+    "demoTitle": "Demo accounts",
+    "demoBody": "Use admin@avatir.com, agent@avatir.com, or client@avatir.com with password password123.",
+    "passwordHint": "Use at least 8 characters.",
+    "forgotPassword": "Forgot password?",
+    "resetTitle": "Reset your password",
+    "resetDescription": "Enter your email and we will send a link to choose a new password.",
+    "sendResetLink": "Send reset link",
+    "resetSent": "If that email is registered, we sent a password reset link.",
+    "backToSignIn": "Back to sign in",
+    "openEmailLink": "Open email link",
+    "verificationSent": "If that email needs verification, we sent a new link.",
+    "resendVerification": "Resend verification email",
+    "choosePasswordTitle": "Choose a new password",
+    "choosePasswordDescription": "Enter a new password for your AVATIR account.",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "passwordMismatch": "Passwords do not match.",
+    "savePassword": "Save password",
+    "resetSuccess": "Your password was updated. You can sign in now.",
+    "resetInvalid": "This reset link is invalid or has expired.",
+    "verifyTitle": "Verify your email",
+    "verifyPending": "Confirming your email address…",
+    "verifySuccess": "Your email is verified. You can continue to your workspace.",
+    "verifyInvalid": "This verification link is invalid or has expired."
   },
   "dashboard": {
     "badge": "Workspace overview",
     "metrics": {
       "activeUsers": {
         "label": "Active users",
-        "detail": "Ready for CRUD wiring"
+        "detail": "Scoped by your assurance role"
       },
       "agreements": {
         "label": "Agreements",
-        "detail": "Mobile-ready flow planned"
+        "detail": "Visible records for this role"
       },
       "googleAuth": {
         "label": "Google auth",
@@ -117,8 +141,8 @@
       }
     },
     "nextSteps": {
-      "title": "Next steps",
-      "body": "Add list, create, edit, and detail flows for users and agreements. The shell is already mobile-first and ready for data."
+      "title": "Role access",
+      "body": "ADMIN manages users and agreements. AGENT can create agreements. CLIENT only sees agreements assigned to their account."
     },
     "googleAuth": {
       "title": "Google auth",
@@ -128,123 +152,49 @@
   },
   "users": {
     "title": "Users",
-    "description": "This is the first placeholder view for the users management flow.",
+    "description": "Create and manage platform users with ADMIN, AGENT, and CLIENT roles.",
     "addUser": "Add user",
+    "editUser": "Edit user",
+    "adminOnly": "Only administrators can manage users.",
+    "role": "Role",
+    "passwordOptional": "Password (leave blank to keep current)",
+    "empty": "No users yet.",
+    "confirmDelete": "Delete {{name}}?",
+    "errorSave": "Could not save this user.",
+    "errorDelete": "Could not delete this user.",
     "roles": {
-      "admin": "Admin",
-      "reviewer": "Reviewer",
-      "operator": "Operator"
+      "ADMIN": "Admin",
+      "AGENT": "Agent",
+      "CLIENT": "Client"
     }
   },
   "agreements": {
     "title": "Agreements",
-    "description": "Simulated and operational surety agreements. Create a new one from Products → Surety Bond Insurance.",
-    "addAgreement": "Simulate surety",
-    "empty": "No agreements yet. Simulate a Surety Bond to create the first one.",
-    "loadError": "Could not load agreements. Make sure the backend is running.",
+    "description": "Create and manage surety agreements for clients.",
+    "clientDescription": "These are the agreements assigned to your account.",
+    "clientHint": "You can view your agreements. Creation is reserved for agents and admins.",
+    "agentHint": "Agents can create agreements. Admins can also edit and delete them.",
+    "addAgreement": "Add agreement",
+    "editAgreement": "Edit agreement",
+    "empty": "No agreements to show for this role.",
+    "confirmDelete": "Delete {{title}}?",
+    "errorSave": "Could not save this agreement.",
+    "errorDelete": "Could not delete this agreement.",
+    "errorInvalid": "Title, client, and a valid amount are required.",
+    "fields": {
+      "title": "Title",
+      "client": "Client",
+      "clientPlaceholder": "Select a CLIENT user",
+      "amount": "Amount",
+      "currency": "Currency",
+      "status": "Status",
+      "notes": "Notes"
+    },
     "statuses": {
       "active": "Active",
       "draft": "Draft",
       "paused": "Paused",
       "closed": "Closed"
-    },
-    "mock": {
-      "primaryServicing": "Primary servicing",
-      "reviewCycle": "Review cycle",
-      "renewalPlan": "Renewal plan"
-    }
-  },
-  "products": {
-    "title": "Products",
-    "description": "Catalog of coverages available to simulate and manage agreements.",
-    "badge": "Catalog",
-    "caucion": {
-      "name": "Surety Bond Insurance",
-      "description": "Contractual guarantee for works, services, and obligations toward a beneficiary.",
-      "simulateCta": "Simulate agreement"
-    }
-  },
-  "simulateCaucion": {
-    "badge": "Simulation",
-    "title": "Simulate Surety Bond Insurance",
-    "description": "Enter obligor and coverage details to estimate the premium and save a draft agreement.",
-    "backToProducts": "Back to products",
-    "fields": {
-      "clientName": "Obligor / client",
-      "clientNamePlaceholder": "North River Construction Inc.",
-      "beneficiary": "Beneficiary",
-      "beneficiaryPlaceholder": "City of Austin",
-      "coverageAmount": "Coverage amount",
-      "coverageAmountPlaceholder": "5000000",
-      "termMonths": "Term (months)",
-      "termMonthsPlaceholder": "12",
-      "riskType": "Bond type",
-      "notes": "Notes",
-      "notesPlaceholder": "Contract purpose, tender number, etc."
-    },
-    "riskTypes": {
-      "contractual": "Contract / performance",
-      "customs": "Customs",
-      "judicial": "Judicial",
-      "rental": "Lease"
-    },
-    "result": {
-      "title": "Simulation result",
-      "coverage": "Coverage amount",
-      "premium": "Estimated premium",
-      "rate": "Applied rate",
-      "term": "Term",
-      "termValue": "{{count}} months",
-      "currency": "ARS"
-    },
-    "actions": {
-      "simulate": "Calculate premium",
-      "saveDraft": "Save draft agreement",
-      "saving": "Saving…",
-      "downloadContract": "Download contract PDF",
-      "viewAgreements": "View agreements",
-      "newSimulation": "New simulation"
-    },
-    "contract": {
-      "title": "SURETY BOND INSURANCE TEMPLATE CONTRACT",
-      "subtitle": "Template document generated from the AVATIR simulation. It does not constitute an issued policy or active coverage until formal approval and issuance.",
-      "partiesHeading": "1. Parties",
-      "obligor": "Obligor",
-      "beneficiary": "Beneficiary",
-      "insurer": "Insurer",
-      "insurerValue": "Insurer to be designated / AVATIR (simulation)",
-      "coverageHeading": "2. Simulated coverage",
-      "product": "Product",
-      "productValue": "Surety Bond Insurance",
-      "bondType": "Bond type",
-      "coverageAmount": "Coverage amount",
-      "premium": "Estimated premium",
-      "rate": "Applied annual rate",
-      "term": "Term",
-      "objectHeading": "3. Purpose",
-      "objectBody": "This template contract is intended to guarantee the Obligor’s obligations toward the Beneficiary, under the simulated surety terms and the particular conditions agreed upon final issuance.",
-      "clausesHeading": "4. General clauses",
-      "clauses": {
-        "scope": "The guarantee is limited to the stated coverage amount and the bond type selected in the simulation.",
-        "premium": "The estimated premium is indicative and may change after risk assessment, documentation review, and issuance terms.",
-        "term": "Coverage start and end dates will be set in the final policy, using the simulated term as a reference.",
-        "claims": "In the event of a claim, the Beneficiary must notify non-performance according to the procedure set in the issued policy.",
-        "nonBinding": "This document is a simulation template and creates no rights or obligations until a formal policy is issued."
-      },
-      "signaturesHeading": "5. Signatures",
-      "signatureObligor": "Obligor",
-      "signatureBeneficiary": "Beneficiary",
-      "signatureInsurer": "Insurer",
-      "disclaimer": "AVATIR generates this template for operational and quotation purposes only. Final issuance requires review, approval, and complete documentation.",
-      "generatedOn": "Generated on {{date}}",
-      "filename": "surety-contract"
-    },
-    "errors": {
-      "required": "Enter obligor, beneficiary, and a valid coverage amount.",
-      "saveFailed": "Could not save the agreement. Make sure the backend is running."
-    },
-    "success": {
-      "saved": "Surety agreement saved as a draft."
     }
   }
 }

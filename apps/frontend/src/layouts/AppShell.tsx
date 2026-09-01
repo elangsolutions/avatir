@@ -1,15 +1,16 @@
 import { Box, Button, Container, Flex, HStack, Stack, Text } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { useAuth } from '../auth/AuthContext';
+import { canManageUsers } from '../auth/permissions';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
 import { ThemeSwitcher } from '../components/ThemeSwitcher';
 import { useAppTheme } from '../theme/app-theme';
 
 const navItems = [
-  { labelKey: 'nav.dashboard', path: '/app' },
-  { labelKey: 'nav.users', path: '/app/users' },
-  { labelKey: 'nav.products', path: '/app/products' },
-  { labelKey: 'nav.agreements', path: '/app/agreements' },
+  { labelKey: 'nav.dashboard', path: '/app', adminOnly: false },
+  { labelKey: 'nav.users', path: '/app/users', adminOnly: true },
+  { labelKey: 'nav.agreements', path: '/app/agreements', adminOnly: false },
 ] as const;
 
 export function AppShell() {
@@ -17,6 +18,14 @@ export function AppShell() {
   const navigate = useNavigate();
   const location = useLocation();
   const { palette } = useAppTheme();
+  const { user, logout } = useAuth();
+
+  const visibleNavItems = navItems.filter((item) => !item.adminOnly || canManageUsers(user?.role));
+
+  const handleSignOut = async () => {
+    await logout();
+    navigate('/app/login', { replace: true });
+  };
 
   return (
     <Flex minH="100vh" bg={palette.pageBg} color={palette.text}>
@@ -44,11 +53,8 @@ export function AppShell() {
           </Box>
 
           <Stack gap={2}>
-            {navItems.map((item) => {
-              const active =
-                item.path === '/app'
-                  ? location.pathname === '/app'
-                  : location.pathname === item.path || location.pathname.startsWith(`${item.path}/`);
+            {visibleNavItems.map((item) => {
+              const active = location.pathname === item.path;
               return (
                 <Button
                   key={item.path}
@@ -67,6 +73,17 @@ export function AppShell() {
         </Stack>
 
         <Stack gap={4} mt={8}>
+          {user && (
+            <Box>
+              <Text fontWeight="600">{user.name}</Text>
+              <Text color={palette.mutedText} fontSize="sm">
+                {user.email}
+              </Text>
+              <Text color={palette.accent} fontSize="sm" mt={1}>
+                {t(`users.roles.${user.role}`)}
+              </Text>
+            </Box>
+          )}
           <HStack gap={3} align="center" wrap="wrap">
             <ThemeSwitcher showLabel />
             <LanguageSwitcher showLabel />
@@ -76,7 +93,7 @@ export function AppShell() {
             borderColor={palette.borderStrong}
             color={palette.text}
             _hover={{ bg: palette.surfaceAlt }}
-            onClick={() => navigate('/')}
+            onClick={() => void handleSignOut()}
           >
             {t('common.signOut')}
           </Button>
@@ -117,7 +134,7 @@ export function AppShell() {
                     borderColor={palette.borderStrong}
                     color={palette.text}
                     bg={palette.surface}
-                    onClick={() => navigate('/')}
+                    onClick={() => void handleSignOut()}
                   >
                     {t('common.exit')}
                   </Button>
@@ -125,11 +142,8 @@ export function AppShell() {
               </Flex>
 
               <HStack gap={2} overflowX="auto" display={{ base: 'flex', md: 'none' }}>
-                {navItems.map((item) => {
-                  const active =
-                    item.path === '/app'
-                      ? location.pathname === '/app'
-                      : location.pathname === item.path || location.pathname.startsWith(`${item.path}/`);
+                {visibleNavItems.map((item) => {
+                  const active = location.pathname === item.path;
                   return (
                     <Button
                       key={item.path}
