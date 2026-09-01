@@ -25,6 +25,22 @@ export const AGREEMENTS_QUERY = gql`
   ${AGREEMENT_FIELDS}
 `;
 
+export type CreateAgreementMutationData = {
+  createAgreement: {
+    id: string;
+    title: string;
+    clientName: string;
+    amount: number;
+    currency: string;
+    status: string;
+    notes?: string | null;
+    ownerId?: string | null;
+    agentId?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  };
+};
+
 export const CREATE_AGREEMENT_MUTATION = gql`
   mutation CreateAgreement($input: CreateAgreementInput!) {
     createAgreement(input: $input) {
