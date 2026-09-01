@@ -12,7 +12,7 @@ FROM deps AS build
 COPY . .
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}
-RUN yarn workspace @avatir/backend prisma:generate
+RUN yarn workspace @avatir/backend db-generate
 RUN yarn workspace @avatir/backend build
 
 FROM node:24-alpine AS runtime
