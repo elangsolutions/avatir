@@ -21,8 +21,11 @@ ENV NODE_ENV=production
 ENV PORT=5001
 RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/apps/backend/package.json ./apps/backend/package.json
 COPY --from=build /app/apps/backend/dist ./apps/backend/dist
 COPY --from=build /app/apps/backend/generated ./apps/backend/generated
-COPY --from=build /app/apps/backend/package.json ./apps/backend/package.json
+COPY --from=build /app/apps/backend/prisma ./apps/backend/prisma
+COPY --from=build /app/apps/backend/prisma.config.ts ./apps/backend/prisma.config.ts
 EXPOSE 5001
-CMD ["node", "apps/backend/dist/main"]
+CMD ["sh", "-c", "cd /app/apps/backend && npx prisma migrate deploy && exec node dist/main"]
