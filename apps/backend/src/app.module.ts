@@ -25,6 +25,7 @@ import { UsersModule } from './users/users.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'schema.gql'),
       sortSchema: true,
+      introspection: process.env.NODE_ENV !== 'production',
       playground: process.env.GRAPHQL_PLAYGROUND !== 'false',
       context: ({ req }: { req: any }) => ({ req }),
     }),
