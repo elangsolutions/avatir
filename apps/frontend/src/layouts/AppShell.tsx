@@ -13,6 +13,10 @@ const navItems = [
   { labelKey: 'nav.agreements', path: '/app/agreements', adminOnly: false },
 ] as const;
 
+function isNavItemActive(pathname: string, itemPath: string) {
+  return pathname === itemPath || (itemPath === '/app/agreements' && pathname.startsWith(`${itemPath}/`));
+}
+
 export function AppShell() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -54,7 +58,7 @@ export function AppShell() {
 
           <Stack gap={2}>
             {visibleNavItems.map((item) => {
-              const active = location.pathname === item.path;
+              const active = isNavItemActive(location.pathname, item.path);
               return (
                 <Button
                   key={item.path}
@@ -143,7 +147,7 @@ export function AppShell() {
 
               <HStack gap={2} overflowX="auto" display={{ base: 'flex', md: 'none' }}>
                 {visibleNavItems.map((item) => {
-                  const active = location.pathname === item.path;
+                  const active = isNavItemActive(location.pathname, item.path);
                   return (
                     <Button
                       key={item.path}

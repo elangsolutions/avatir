@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuth, RequireRole } from './auth/RequireAuth';
 import { AppShell } from './layouts/AppShell';
 import { AgreementsPage } from './pages/AgreementsPage';
+import { AgreementSimulationPage } from './pages/AgreementSimulationPage';
 import { AuthPage } from './pages/AuthPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { LandingPage } from './pages/LandingPage';
@@ -54,6 +55,7 @@ export function App() {
             }
           />
           <Route path="agreements" element={<AgreementsPage />} />
+          <Route path="agreements/simulate" element={<AgreementSimulationPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

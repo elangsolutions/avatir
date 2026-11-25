@@ -7,6 +7,7 @@
     "build": "nest build",
     "start:prod": "prisma migrate deploy && node dist/main",
     "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:quotes": "npm run build && node --test test/quote-simulator.test.cjs",
     "db-generate": "prisma generate",
     "integration:key": "nest build && node dist/scripts/issue-integration-key.js",
     "migrate:dev": "prisma migrate dev",

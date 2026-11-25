@@ -171,9 +171,12 @@
   "agreements": {
     "title": "Agreements",
     "description": "Create and manage surety agreements for clients.",
+    "badge": "Agreements workspace",
     "clientDescription": "These are the agreements assigned to your account.",
     "clientHint": "You can view your agreements. Creation is reserved for agents and admins.",
     "agentHint": "Agents can create agreements. Admins can also edit and delete them.",
+    "simulate": "Simulate insurer prices",
+    "create": "Create an agreement",
     "addAgreement": "Add agreement",
     "editAgreement": "Edit agreement",
     "empty": "No agreements to show for this role.",
@@ -195,6 +198,75 @@
       "draft": "Draft",
       "paused": "Paused",
       "closed": "Closed"
+    }
+  },
+  "agreementSimulator": {
+    "badge": "Agreement simulator",
+    "title": "Compare surety prices",
+    "description": "Enter the policy request details to compare up to five prices. Simulations are estimates and are not binding offers.",
+    "back": "Back to agreements",
+    "simulate": "Get prices",
+    "reset": "Clear form",
+    "policy": {
+      "heading": "Policy details",
+      "kind": "Policy type",
+      "kinds": {
+        "OFERTA": "Bid bond",
+        "ADJUDICACION": "Performance bond"
+      },
+      "format": "Policy format",
+      "formats": {
+        "ELECTRONICA": "Electronic",
+        "ELECTRONICA_CERTIFICADA": "Certified electronic",
+        "FISICA": "Paper"
+      },
+      "amount": "Coverage amount",
+      "currency": "Currency"
+    },
+    "applicant": {
+      "heading": "Applicant",
+      "name": "Full name or company name",
+      "taxId": "CUIT",
+      "email": "Account email (optional)",
+      "address": "Address (optional)"
+    },
+    "beneficiary": {
+      "heading": "Beneficiary",
+      "name": "Full name or company name",
+      "taxId": "CUIT",
+      "address": "Address (optional)"
+    },
+    "tender": {
+      "heading": "Tender or contract",
+      "processCode": "Process code",
+      "fileNumber": "File number (optional)",
+      "bidOpeningAt": "Bid opening date and time (optional)",
+      "purpose": "Purpose",
+      "purchaseOrder": "Purchase order (optional)",
+      "billingPeriod": "Billing period (optional)"
+    },
+    "errors": {
+      "amount": "Enter a valid coverage amount.",
+      "owner": "The applicant email must match an existing client account.",
+      "simulate": "Could not get prices. Check the details and try again.",
+      "create": "Could not create the draft agreement."
+    },
+    "result": {
+      "title": "Lowest prices",
+      "sources": {
+        "mock": "Example prices",
+        "live": "Insurer prices"
+      },
+      "mockNotice": "These are example prices from a local simulator, not offers from insurance companies.",
+      "liveNotice": "Prices were returned by the configured provider and may change before issuance.",
+      "rank": "#{{rank}}",
+      "company": "Company",
+      "premium": "Estimated premium",
+      "source": "Price source",
+      "validUntil": "Valid until {{date}}",
+      "createAgreement": "Create draft agreement",
+      "saved": "Draft agreement {{id}} created.",
+      "viewAgreements": "View agreements"
     }
   }
 }

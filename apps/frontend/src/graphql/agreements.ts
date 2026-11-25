@@ -25,6 +25,60 @@ export const AGREEMENTS_QUERY = gql`
   ${AGREEMENT_FIELDS}
 `;
 
+export type AgreementSimulationInput = {
+  policyKind: 'OFERTA' | 'ADJUDICACION';
+  policyFormat: 'ELECTRONICA' | 'ELECTRONICA_CERTIFICADA' | 'FISICA';
+  policyAmount: number;
+  currency: 'ARS' | 'USD';
+  applicant: {
+    name: string;
+    taxId: string;
+    address?: string;
+    ownerEmail?: string;
+  };
+  beneficiary: {
+    name: string;
+    taxId: string;
+    address?: string;
+  };
+  tender: {
+    processCode: string;
+    fileNumber?: string;
+    bidOpeningAt?: string;
+    purpose: string;
+    purchaseOrder?: string;
+    billingPeriod?: string;
+  };
+};
+
+export type AgreementQuoteSimulationData = {
+  simulateAgreementQuotes: {
+    source: 'mock' | 'live';
+    simulatedAt: string;
+    quotes: Array<{
+      company: string;
+      premium: number;
+      currency: string;
+      validUntil?: string | null;
+    }>;
+  };
+};
+
+export const SIMULATE_AGREEMENT_QUOTES_MUTATION = gql`
+  mutation SimulateAgreementQuotes($input: AgreementSimulationInput!) {
+    simulateAgreementQuotes(input: $input) {
+      source
+      simulatedAt
+      quotes {
+        company
+        premium
+        currency
+        validUntil
+      }
+    }
+  }
+`;
+
 export type CreateAgreementMutationData = {
   createAgreement: {
     id: string;

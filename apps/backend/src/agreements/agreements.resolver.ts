@@ -3,12 +3,22 @@ import { AuthenticatedUser } from '../auth/auth.types';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { UserRole } from '../auth/roles';
 import { Roles } from '../auth/roles.decorator';
-import { Agreement, CreateAgreementInput, UpdateAgreementInput } from './agreements.types';
+import {
+  Agreement,
+  AgreementQuoteSimulation,
+  AgreementSimulationInput,
+  CreateAgreementInput,
+  UpdateAgreementInput,
+} from './agreements.types';
 import { AgreementsService } from './agreements.service';
+import { QuoteSimulatorService } from './quote-simulator.service';
 
 @Resolver(() => Agreement)
 export class AgreementsResolver {
-  constructor(private readonly agreementsService: AgreementsService) {}
+  constructor(
+    private readonly agreementsService: AgreementsService,
+    private readonly quoteSimulator: QuoteSimulatorService,
+  ) {}
 
   @Query(() => [Agreement], { name: 'agreements' })
   agreements(@CurrentUser() actor: AuthenticatedUser) {
@@ -18,6 +28,11 @@ export class AgreementsResolver {
   @Query(() => Agreement, { name: 'agreement' })
   agreement(@Args('id') id: string, @CurrentUser() actor: AuthenticatedUser) {
     return this.agreementsService.findOne(id, actor);
+  }
+
+  @Mutation(() => AgreementQuoteSimulation, { name: 'simulateAgreementQuotes' })
+  simulateAgreementQuotes(@Args('input') input: AgreementSimulationInput) {
+    return this.quoteSimulator.simulate(input);
   }
 
   @Roles(UserRole.ADMIN, UserRole.AGENT)

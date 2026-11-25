@@ -171,9 +171,12 @@
   "agreements": {
     "title": "Acuerdos",
     "description": "Creá y administrá acuerdos de caución para clientes.",
+    "badge": "Espacio de acuerdos",
     "clientDescription": "Estos son los acuerdos asignados a tu cuenta.",
     "clientHint": "Podés ver tus acuerdos. La creación está reservada para agentes y administradores.",
     "agentHint": "Los agentes pueden crear acuerdos. Los administradores también pueden editarlos y eliminarlos.",
+    "simulate": "Simular precios de aseguradoras",
+    "create": "Crear un acuerdo",
     "addAgreement": "Agregar acuerdo",
     "editAgreement": "Editar acuerdo",
     "empty": "No hay acuerdos para mostrar con este rol.",
@@ -195,6 +198,75 @@
       "draft": "Borrador",
       "paused": "Pausado",
       "closed": "Cerrado"
+    }
+  },
+  "agreementSimulator": {
+    "badge": "Simulador de acuerdos",
+    "title": "Compará precios de caución",
+    "description": "Ingresá los datos del pedido de póliza para comparar hasta cinco precios. Las simulaciones son estimaciones y no constituyen ofertas vinculantes.",
+    "back": "Volver a acuerdos",
+    "simulate": "Consultar precios",
+    "reset": "Limpiar formulario",
+    "policy": {
+      "heading": "Datos de la póliza",
+      "kind": "Tipo de póliza",
+      "kinds": {
+        "OFERTA": "Garantía de oferta",
+        "ADJUDICACION": "Garantía de adjudicación"
+      },
+      "format": "Formato de póliza",
+      "formats": {
+        "ELECTRONICA": "Electrónica",
+        "ELECTRONICA_CERTIFICADA": "Electrónica certificada",
+        "FISICA": "Física"
+      },
+      "amount": "Monto asegurado",
+      "currency": "Moneda"
+    },
+    "applicant": {
+      "heading": "Tomador",
+      "name": "Nombre o razón social",
+      "taxId": "CUIT",
+      "email": "Correo de la cuenta (opcional)",
+      "address": "Domicilio (opcional)"
+    },
+    "beneficiary": {
+      "heading": "Beneficiario",
+      "name": "Nombre o razón social",
+      "taxId": "CUIT",
+      "address": "Domicilio (opcional)"
+    },
+    "tender": {
+      "heading": "Licitación o contrato",
+      "processCode": "Código de proceso",
+      "fileNumber": "Número de expediente (opcional)",
+      "bidOpeningAt": "Fecha y hora de apertura (opcional)",
+      "purpose": "Objeto",
+      "purchaseOrder": "Orden de compra (opcional)",
+      "billingPeriod": "Período de facturación (opcional)"
+    },
+    "errors": {
+      "amount": "Ingresá un monto asegurado válido.",
+      "owner": "El correo del tomador debe coincidir con una cuenta de cliente existente.",
+      "simulate": "No se pudieron consultar los precios. Revisá los datos e intentá de nuevo.",
+      "create": "No se pudo crear el borrador del acuerdo."
+    },
+    "result": {
+      "title": "Precios más bajos",
+      "sources": {
+        "mock": "Precios de ejemplo",
+        "live": "Precios de aseguradoras"
+      },
+      "mockNotice": "Estos son precios de ejemplo de un simulador local, no cotizaciones de compañías de seguros.",
+      "liveNotice": "Los precios provienen del proveedor configurado y pueden cambiar antes de la emisión.",
+      "rank": "N.º {{rank}}",
+      "company": "Compañía",
+      "premium": "Prima estimada",
+      "source": "Origen del precio",
+      "validUntil": "Válido hasta {{date}}",
+      "createAgreement": "Crear borrador del acuerdo",
+      "saved": "Se creó el borrador del acuerdo {{id}}.",
+      "viewAgreements": "Ver acuerdos"
     }
   }
 }
