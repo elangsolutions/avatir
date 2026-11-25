@@ -8,6 +8,7 @@
     "start:prod": "prisma migrate deploy && node dist/main",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "db-generate": "prisma generate",
+    "integration:key": "nest build && node dist/scripts/issue-integration-key.js",
     "migrate:dev": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio"
