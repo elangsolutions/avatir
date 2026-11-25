@@ -2,6 +2,7 @@ import { Badge, Box, Button, Heading, HStack, Input, SimpleGrid, Stack, Text } f
 import { useMutation, useQuery } from '@apollo/client/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { canCreateAgreements, canDeleteAgreements, canListClients } from '../auth/permissions';
 import { SelectField, TextAreaField } from '../components/FormFields';
@@ -68,6 +69,7 @@ function formatAmount(amount: number, currency: string) {
 
 export function AgreementsPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { palette } = useAppTheme();
   const { user } = useAuth();
   const canWrite = canCreateAgreements(user?.role);
@@ -188,7 +190,7 @@ export function AgreementsPage() {
           borderWidth="1px"
           borderColor={palette.border}
         >
-          {t('common.crudArea')}
+          {t('agreements.badge')}
         </Badge>
         <Heading size="xl" mt={4}>
           {t('agreements.title')}
@@ -198,16 +200,26 @@ export function AgreementsPage() {
         </Text>
       </Box>
 
-      <HStack justify="space-between" wrap="wrap" gap={3}>
+      <Stack gap={3}>
         <Text color={palette.mutedText}>
           {user?.role === 'CLIENT' ? t('agreements.clientHint') : t('agreements.agentHint')}
         </Text>
-        {canWrite && (
-          <Button bg={palette.accent} color={palette.accentText} onClick={openCreate}>
-            {t('agreements.addAgreement')}
+        <SimpleGrid columns={{ base: 1, md: canWrite ? 2 : 1 }} gap={3}>
+          <Button
+            size="lg"
+            bg={palette.accent}
+            color={palette.accentText}
+            onClick={() => navigate('/app/agreements/simulate')}
+          >
+            {t('agreements.simulate')}
           </Button>
-        )}
-      </HStack>
+          {canWrite && (
+            <Button size="lg" variant="outline" borderColor={palette.borderStrong} onClick={openCreate}>
+              {t('agreements.create')}
+            </Button>
+          )}
+        </SimpleGrid>
+      </Stack>
 
       {formOpen && canWrite && (
         <Box

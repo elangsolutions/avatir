@@ -33,11 +33,30 @@ model User {
   agreements        Agreement[] @relation("AgreementClient")
   sourcedAgreements Agreement[] @relation("AgreementAgent")
   authTokens        AuthToken[]
+  integrationClients IntegrationClient[] @relation("IntegrationClientAgent")
 }
 
 enum AuthTokenType {
   EMAIL_VERIFICATION
   PASSWORD_RESET
+}
+
+enum PolicyKind {
+  OFERTA
+  ADJUDICACION
+}
+
+enum PolicyFormat {
+  ELECTRONICA
+  ELECTRONICA_CERTIFICADA
+  FISICA
+}
+
+enum PolicyRequestStatus {
+  received
+  under_review
+  issued
+  rejected
 }
 
 model AuthToken {
@@ -57,7 +76,7 @@ model Agreement {
   id          String           @id @default(cuid())
   title       String
   clientName  String
-  amount      Decimal          @db.Decimal(12, 2)
+  amount      Decimal          @db.Decimal(14, 2)
   currency    String           @default("USD")
   status      AgreementStatus  @default(draft)
   startDate   DateTime?
@@ -69,4 +88,56 @@ model Agreement {
   agent       User?            @relation("AgreementAgent", fields: [agentId], references: [id], onDelete: SetNull)
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
+  policyRequest PolicyRequest?
+}
+
+/// Machine-to-machine credential used by brokers to submit policy requests.
+model IntegrationClient {
+  id             String          @id @default(cuid())
+  name           String
+  keyPrefix      String          @unique
+  keyHash        String
+  scopes         String[]
+  agentId        String?
+  agent          User?           @relation("IntegrationClientAgent", fields: [agentId], references: [id], onDelete: SetNull)
+  expiresAt      DateTime?
+  revokedAt      DateTime?
+  lastUsedAt     DateTime?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  policyRequests PolicyRequest[]
+}
+
+/// A "pedido de poliza": the surety bond request that backs an Agreement.
+model PolicyRequest {
+  id                  String              @id @default(cuid())
+  agreementId         String              @unique
+  agreement           Agreement           @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  integrationClientId String
+  integrationClient   IntegrationClient   @relation(fields: [integrationClientId], references: [id], onDelete: Cascade)
+  idempotencyKey      String
+  status              PolicyRequestStatus @default(received)
+  policyKind          PolicyKind
+  policyFormat        PolicyFormat
+  policyAmount        Decimal             @db.Decimal(14, 2)
+  currency            String              @default("ARS")
+  applicantName       String
+  applicantTaxId      String
+  applicantAddress    String?
+  beneficiaryName     String
+  beneficiaryTaxId    String
+  beneficiaryAddress  String?
+  processCode         String
+  fileNumber          String?
+  bidOpeningAt        DateTime?
+  purpose             String
+  purchaseOrder       String?
+  billingPeriod       String?
+  payload             Json
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+
+  @@unique([integrationClientId, idempotencyKey])
+  @@index([processCode])
+  @@index([applicantTaxId])
 }

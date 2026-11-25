@@ -7,6 +7,7 @@ import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { AgreementsModule } from './agreements/agreements.module';
+import { IntegrationModule } from './integration/integration.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 
@@ -33,6 +34,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     UsersModule,
     AgreementsModule,
+    IntegrationModule,
   ],
   providers: [AppResolver, AppService],
 })

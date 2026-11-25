@@ -16,6 +16,51 @@ type Agreement {
   updatedAt: DateTime!
 }
 
+type AgreementQuote {
+  company: String!
+  currency: String!
+  premium: Float!
+  validUntil: String
+}
+
+type AgreementQuoteSimulation {
+  quotes: [AgreementQuote!]!
+  simulatedAt: DateTime!
+  source: String!
+}
+
+input AgreementSimulationApplicantInput {
+  address: String
+  name: String!
+  ownerEmail: String
+  taxId: String!
+}
+
+input AgreementSimulationInput {
+  applicant: AgreementSimulationApplicantInput!
+  beneficiary: AgreementSimulationPartyInput!
+  currency: String
+  policyAmount: Float!
+  policyFormat: String!
+  policyKind: String!
+  tender: AgreementSimulationTenderInput!
+}
+
+input AgreementSimulationPartyInput {
+  address: String
+  name: String!
+  taxId: String!
+}
+
+input AgreementSimulationTenderInput {
+  bidOpeningAt: String
+  billingPeriod: String
+  fileNumber: String
+  processCode: String!
+  purchaseOrder: String
+  purpose: String!
+}
+
 type AppInfo {
   name: String!
   status: String!
@@ -80,6 +125,7 @@ type Mutation {
   requestPasswordReset(input: RequestEmailInput!): AuthMessage!
   resendVerificationEmail(input: RequestEmailInput!): AuthMessage!
   resetPassword(input: ResetPasswordInput!): AuthMessage!
+  simulateAgreementQuotes(input: AgreementSimulationInput!): AgreementQuoteSimulation!
   startGoogleSignIn: AuthOverview!
   updateAgreement(id: String!, input: UpdateAgreementInput!): Agreement!
   updateUser(id: String!, input: UpdateUserInput!): User!

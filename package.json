@@ -10,7 +10,7 @@
     "build": "npm run build --workspace @avatir/backend && npm run build --workspace @avatir/frontend",
     "start": "npm run start:prod --workspace @avatir/backend",
     "typecheck": "npm run typecheck --workspaces",
-    "db:migrate": "yarn workspace @avatir/backend prisma:migrate:dev"
+    "db:migrate": "npm run migrate:dev --workspace @avatir/backend"
   },
   "devDependencies": {
     "concurrently": "^10.0.3"
