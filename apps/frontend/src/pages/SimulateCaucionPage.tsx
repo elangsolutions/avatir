@@ -17,6 +17,7 @@ import {
   CREATE_AGREEMENT_MUTATION,
   CreateAgreementMutationData,
 } from '../graphql/agreements';
+import { CurrencyAmountInput } from '../components/CurrencyAmountInput';
 import {
   CaucionRiskType,
   formatMoney,
@@ -48,7 +49,7 @@ export function SimulateCaucionPage() {
     CREATE_AGREEMENT_MUTATION,
   );
 
-  const parsedCoverage = Number(coverageAmount.replace(/\./g, '').replace(',', '.'));
+  const parsedCoverage = Number(coverageAmount);
   const parsedTerm = Number(termMonths);
 
   const canSimulate = useMemo(
@@ -249,13 +250,11 @@ export function SimulateCaucionPage() {
                 <Text fontSize="sm" mb={2} color={palette.mutedText}>
                   {t('simulateCaucion.fields.coverageAmount')}
                 </Text>
-                <Input
-                  bg={palette.inputBg}
-                  borderColor={palette.inputBorder}
+                <CurrencyAmountInput
                   value={coverageAmount}
-                  onChange={(event) => setCoverageAmount(event.target.value)}
-                  placeholder={t('simulateCaucion.fields.coverageAmountPlaceholder')}
-                  inputMode="decimal"
+                  currency="ARS"
+                  locale={locale}
+                  onChange={setCoverageAmount}
                 />
               </Box>
               <Box>

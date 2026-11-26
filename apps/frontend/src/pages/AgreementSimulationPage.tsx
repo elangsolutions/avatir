@@ -15,6 +15,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { canCreateAgreements } from '../auth/permissions';
+import { CurrencyAmountInput } from '../components/CurrencyAmountInput';
+import { formatMoney } from '../components/currency-amount';
 import { SelectField, TextAreaField } from '../components/FormFields';
 import {
   AgreementQuoteSimulationData,
@@ -243,7 +245,13 @@ export function AgreementSimulationPage() {
               </SelectField>
             </Field>
             <Field label={t('agreementSimulator.policy.amount')} palette={palette}>
-              <Input type="number" min="0.01" step="0.01" required value={form.policyAmount} onChange={(event) => updateField('policyAmount', event.target.value)} bg={palette.inputBg} borderColor={palette.inputBorder} />
+              <CurrencyAmountInput
+                required
+                value={form.policyAmount}
+                currency={form.currency}
+                locale={locale}
+                onChange={(amount) => updateField('policyAmount', amount)}
+              />
             </Field>
             <Field label={t('agreementSimulator.policy.currency')} palette={palette}>
               <SelectField value={form.currency} onChange={(event) => updateField('currency', event.target.value as SimulationForm['currency'])}>
@@ -375,8 +383,4 @@ function Field({ label, palette, children }: { label: string; palette: ReturnTyp
       {children}
     </Box>
   );
-}
-
-function formatMoney(amount: number, currency: string, locale: string) {
-  return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount);
 }

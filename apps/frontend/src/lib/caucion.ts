@@ -1,3 +1,5 @@
+import { formatMoney as formatCurrencyMoney } from '../components/currency-amount';
+
 export type CaucionRiskType = 'contractual' | 'customs' | 'judicial' | 'rental';
 
 export const CAUCION_RISK_RATES: Record<CaucionRiskType, number> = {
@@ -39,11 +41,7 @@ export function simulateCaucionPremium(input: CaucionSimulationInput): CaucionSi
 }
 
 export function formatMoney(amount: number, currency = 'ARS', locale = 'es-AR') {
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency,
-    maximumFractionDigits: 2,
-  }).format(amount);
+  return formatCurrencyMoney(amount, currency, locale);
 }
 
 export function formatRate(rate: number, locale = 'es-AR') {

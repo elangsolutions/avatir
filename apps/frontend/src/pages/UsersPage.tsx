@@ -137,19 +137,7 @@ export function UsersPage() {
   return (
     <Stack gap={6}>
       <Box>
-        <Badge
-          bg={palette.accentSoft}
-          color={palette.accentText}
-          variant="subtle"
-          px={3}
-          py={1}
-          borderRadius="full"
-          borderWidth="1px"
-          borderColor={palette.border}
-        >
-          {t('common.crudArea')}
-        </Badge>
-        <Heading size="xl" mt={4}>
+        <Heading size="xl">
           {t('users.title')}
         </Heading>
         <Text color={palette.mutedText} mt={2}>

@@ -18,7 +18,6 @@
   "common": {
     "signOut": "Sign out",
     "exit": "Exit",
-    "crudArea": "CRUD area",
     "language": "Language",
     "theme": "Theme",
     "backToHome": "Back to home",
@@ -175,15 +174,26 @@
     "clientDescription": "These are the agreements assigned to your account.",
     "clientHint": "You can view your agreements. Creation is reserved for agents and admins.",
     "agentHint": "Agents can create agreements. Admins can also edit and delete them.",
-    "simulate": "Simulate insurer prices",
+    "simulate": "Simulate",
     "create": "Create an agreement",
     "addAgreement": "Add agreement",
+    "generate": "Generate",
     "editAgreement": "Edit agreement",
     "empty": "No agreements to show for this role.",
+    "view": {
+      "label": "Agreements view",
+      "cards": "Cards",
+      "list": "List"
+    },
+    "actions": "Actions",
     "confirmDelete": "Delete {{title}}?",
     "errorSave": "Could not save this agreement.",
     "errorDelete": "Could not delete this agreement.",
     "errorInvalid": "Title, client, and a valid amount are required.",
+    "currencies": {
+      "ARS": "Pesos",
+      "USD": "Dollar"
+    },
     "fields": {
       "title": "Title",
       "client": "Client",

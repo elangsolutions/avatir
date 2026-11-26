@@ -18,7 +18,6 @@
   "common": {
     "signOut": "Cerrar sesión",
     "exit": "Salir",
-    "crudArea": "Área CRUD",
     "language": "Idioma",
     "theme": "Tema",
     "backToHome": "Volver al inicio",
@@ -175,15 +174,26 @@
     "clientDescription": "Estos son los acuerdos asignados a tu cuenta.",
     "clientHint": "Podés ver tus acuerdos. La creación está reservada para agentes y administradores.",
     "agentHint": "Los agentes pueden crear acuerdos. Los administradores también pueden editarlos y eliminarlos.",
-    "simulate": "Simular precios de aseguradoras",
+    "simulate": "Simular",
     "create": "Crear un acuerdo",
     "addAgreement": "Agregar acuerdo",
+    "generate": "Generar",
     "editAgreement": "Editar acuerdo",
     "empty": "No hay acuerdos para mostrar con este rol.",
+    "view": {
+      "label": "Vista de acuerdos",
+      "cards": "Tarjetas",
+      "list": "Lista"
+    },
+    "actions": "Acciones",
     "confirmDelete": "¿Eliminar {{title}}?",
     "errorSave": "No se pudo guardar este acuerdo.",
     "errorDelete": "No se pudo eliminar este acuerdo.",
     "errorInvalid": "El título, el cliente y un importe válido son obligatorios.",
+    "currencies": {
+      "ARS": "Pesos",
+      "USD": "Dólar"
+    },
     "fields": {
       "title": "Título",
       "client": "Cliente",

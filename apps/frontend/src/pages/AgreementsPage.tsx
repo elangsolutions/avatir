@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { canCreateAgreements, canDeleteAgreements, canListClients } from '../auth/permissions';
+import { CurrencyAmountInput } from '../components/CurrencyAmountInput';
+import { finalizeCurrencyAmount, formatMoney } from '../components/currency-amount';
 import { SelectField, TextAreaField } from '../components/FormFields';
 import {
   AGREEMENTS_QUERY,
@@ -56,21 +58,24 @@ const emptyForm: AgreementFormState = {
 
 const statuses = ['draft', 'active', 'paused', 'closed'] as const;
 
-function formatAmount(amount: number, currency: string) {
+type AgreementsView = 'cards' | 'list';
+
+const viewStorageKey = 'avatir.agreements.view';
+
+function readStoredView(): AgreementsView {
   try {
-    return new Intl.NumberFormat(undefined, {
-      style: 'currency',
-      currency,
-    }).format(amount);
+    return window.localStorage.getItem(viewStorageKey) === 'list' ? 'list' : 'cards';
   } catch {
-    return `${currency} ${amount.toFixed(2)}`;
+    return 'cards';
   }
 }
 
 export function AgreementsPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { palette } = useAppTheme();
+  const locale = i18n.language?.startsWith('en') ? 'en-US' : 'es-AR';
+  const defaultCurrency = i18n.language?.startsWith('en') ? 'USD' : 'ARS';
   const { user } = useAuth();
   const canWrite = canCreateAgreements(user?.role);
   const canDelete = canDeleteAgreements(user?.role);
@@ -92,6 +97,16 @@ export function AgreementsPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<AgreementFormState>(emptyForm);
   const [error, setError] = useState('');
+  const [view, setView] = useState<AgreementsView>(readStoredView);
+
+  const changeView = (nextView: AgreementsView) => {
+    setView(nextView);
+    try {
+      window.localStorage.setItem(viewStorageKey, nextView);
+    } catch {
+      // Ignore storage failures; the selection still applies for this session.
+    }
+  };
 
   const agreements = data?.agreements ?? [];
   const clients = clientsData?.clients ?? [];
@@ -106,7 +121,7 @@ export function AgreementsPage() {
 
   const openCreate = () => {
     setEditingId(null);
-    setForm(emptyForm);
+    setForm({ ...emptyForm, currency: defaultCurrency });
     setFormOpen(true);
     setError('');
   };
@@ -117,7 +132,7 @@ export function AgreementsPage() {
       title: agreement.title,
       ownerId: agreement.ownerId ?? '',
       clientName: agreement.clientName,
-      amount: String(agreement.amount),
+      amount: finalizeCurrencyAmount(String(agreement.amount)),
       currency: agreement.currency,
       status: agreement.status,
       notes: agreement.notes ?? '',
@@ -176,6 +191,45 @@ export function AgreementsPage() {
       setError(getErrorMessage(err, t('agreements.errorDelete')));
     }
   };
+
+  const renderStatus = (agreement: Agreement, mt?: number) => (
+    <Badge
+      mt={mt}
+      bg={palette.accentAltSoft}
+      color={palette.accentText}
+      variant="subtle"
+      borderWidth="1px"
+      borderColor={palette.border}
+    >
+      {t(`agreements.statuses.${agreement.status}`, { defaultValue: agreement.status })}
+    </Badge>
+  );
+
+  const renderActions = (agreement: Agreement, mt?: number) =>
+    canWrite || canDelete ? (
+      <HStack mt={mt} gap={3}>
+        {canWrite && (
+          <Button size="sm" variant="outline" borderColor={palette.borderStrong} onClick={() => openEdit(agreement)}>
+            {t('common.edit')}
+          </Button>
+        )}
+        {canDelete && (
+          <Button
+            size="sm"
+            variant="outline"
+            borderColor={palette.borderStrong}
+            color="#E11D48"
+            disabled={deleting}
+            onClick={() => void handleDelete(agreement)}
+          >
+            {t('common.delete')}
+          </Button>
+        )}
+      </HStack>
+    ) : null;
+
+  const hasActions = canWrite || canDelete;
+  const listColumns = hasActions ? '2fr 1fr 1fr auto' : '2fr 1fr 1fr';
 
   return (
     <Stack gap={6}>
@@ -262,12 +316,11 @@ export function AgreementsPage() {
               <Text fontSize="sm" mb={2} color={palette.mutedText}>
                 {t('agreements.fields.amount')}
               </Text>
-              <Input
-                bg={palette.inputBg}
-                borderColor={palette.inputBorder}
-                type="number"
+              <CurrencyAmountInput
                 value={form.amount}
-                onChange={(event) => setForm((current) => ({ ...current, amount: event.target.value }))}
+                currency={form.currency}
+                locale={locale}
+                onChange={(amount) => setForm((current) => ({ ...current, amount }))}
               />
             </Box>
             <HStack gap={4} align="start">
@@ -275,12 +328,14 @@ export function AgreementsPage() {
                 <Text fontSize="sm" mb={2} color={palette.mutedText}>
                   {t('agreements.fields.currency')}
                 </Text>
-                <Input
-                  bg={palette.inputBg}
-                  borderColor={palette.inputBorder}
+                <SelectField
                   value={form.currency}
                   onChange={(event) => setForm((current) => ({ ...current, currency: event.target.value }))}
-                />
+                >
+                  {!['ARS', 'USD'].includes(form.currency) && <option value={form.currency}>{form.currency}</option>}
+                  <option value="ARS">{t('agreements.currencies.ARS')}</option>
+                  <option value="USD">{t('agreements.currencies.USD')}</option>
+                </SelectField>
               </Box>
               <Box flex="1">
                 <Text fontSize="sm" mb={2} color={palette.mutedText}>
@@ -314,7 +369,7 @@ export function AgreementsPage() {
             ) : null}
             <HStack gap={3}>
               <Button bg={palette.accent} color={palette.accentText} loading={saving} onClick={() => void handleSubmit()}>
-                {t('common.save')}
+                {editingId ? t('common.save') : t('agreements.generate')}
               </Button>
               <Button variant="outline" borderColor={palette.borderStrong} onClick={closeForm}>
                 {t('common.cancel')}
@@ -335,65 +390,109 @@ export function AgreementsPage() {
       ) : agreements.length === 0 ? (
         <Text color={palette.mutedText}>{t('agreements.empty')}</Text>
       ) : (
-        <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={4}>
-          {agreements.map((agreement) => (
+        <Stack gap={4}>
+          <HStack justify="flex-end" gap={2} role="group" aria-label={t('agreements.view.label')}>
+            {(['cards', 'list'] as const).map((option) => {
+              const selected = view === option;
+              return (
+                <Button
+                  key={option}
+                  size="sm"
+                  variant={selected ? 'solid' : 'outline'}
+                  bg={selected ? palette.accent : undefined}
+                  color={selected ? palette.accentText : undefined}
+                  borderColor={palette.borderStrong}
+                  aria-pressed={selected}
+                  onClick={() => changeView(option)}
+                >
+                  {t(`agreements.view.${option}`)}
+                </Button>
+              );
+            })}
+          </HStack>
+
+          {view === 'cards' ? (
+            <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={4}>
+              {agreements.map((agreement) => (
+                <Box
+                  key={agreement.id}
+                  p={5}
+                  borderRadius="2xl"
+                  borderWidth="1px"
+                  borderColor={palette.border}
+                  bg={palette.surface}
+                  boxShadow={palette.shadow}
+                >
+                  <Text fontWeight="600" fontSize="lg">
+                    {agreement.title}
+                  </Text>
+                  <Text color={palette.mutedText} mt={1}>
+                    {agreement.clientName}
+                  </Text>
+                  <Text mt={4} fontSize="2xl" fontWeight="700">
+                    {formatMoney(agreement.amount, agreement.currency, locale)}
+                  </Text>
+                  {renderStatus(agreement, 4)}
+                  {renderActions(agreement, 5)}
+                </Box>
+              ))}
+            </SimpleGrid>
+          ) : (
             <Box
-              key={agreement.id}
-              p={5}
               borderRadius="2xl"
               borderWidth="1px"
               borderColor={palette.border}
               bg={palette.surface}
               boxShadow={palette.shadow}
+              overflow="hidden"
             >
-              <Text fontWeight="600" fontSize="lg">
-                {agreement.title}
-              </Text>
-              <Text color={palette.mutedText} mt={1}>
-                {agreement.clientName}
-              </Text>
-              <Text mt={4} fontSize="2xl" fontWeight="700">
-                {formatAmount(agreement.amount, agreement.currency)}
-              </Text>
-              <Badge
-                mt={4}
-                bg={palette.accentAltSoft}
-                color={palette.accentText}
-                variant="subtle"
-                borderWidth="1px"
+              <Box
+                display={{ base: 'none', md: 'grid' }}
+                gridTemplateColumns={listColumns}
+                gap={4}
+                px={5}
+                py={3}
+                borderBottomWidth="1px"
                 borderColor={palette.border}
+                color={palette.mutedText}
+                fontSize="sm"
+                fontWeight="600"
               >
-                {t(`agreements.statuses.${agreement.status}`, { defaultValue: agreement.status })}
-              </Badge>
-              {(canWrite || canDelete) && (
-                <HStack mt={5} gap={3}>
-                  {canWrite && (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      borderColor={palette.borderStrong}
-                      onClick={() => openEdit(agreement)}
-                    >
-                      {t('common.edit')}
-                    </Button>
+                <Text>{t('agreements.fields.title')}</Text>
+                <Text>{t('agreements.fields.amount')}</Text>
+                <Text>{t('agreements.fields.status')}</Text>
+                {hasActions && <Text textAlign="right">{t('agreements.actions')}</Text>}
+              </Box>
+              {agreements.map((agreement, index) => (
+                <Box
+                  key={agreement.id}
+                  display="grid"
+                  gridTemplateColumns={{ base: '1fr', md: listColumns }}
+                  alignItems="center"
+                  gap={{ base: 2, md: 4 }}
+                  px={5}
+                  py={4}
+                  borderTopWidth={index === 0 ? 0 : '1px'}
+                  borderColor={palette.border}
+                >
+                  <Box minW={0}>
+                    <Text fontWeight="600" truncate>
+                      {agreement.title}
+                    </Text>
+                    <Text color={palette.mutedText} fontSize="sm" truncate>
+                      {agreement.clientName}
+                    </Text>
+                  </Box>
+                  <Text fontWeight="700">{formatMoney(agreement.amount, agreement.currency, locale)}</Text>
+                  <Box>{renderStatus(agreement)}</Box>
+                  {hasActions && (
+                    <Box justifySelf={{ base: 'start', md: 'end' }}>{renderActions(agreement)}</Box>
                   )}
-                  {canDelete && (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      borderColor={palette.borderStrong}
-                      color="#E11D48"
-                      disabled={deleting}
-                      onClick={() => void handleDelete(agreement)}
-                    >
-                      {t('common.delete')}
-                    </Button>
-                  )}
-                </HStack>
-              )}
+                </Box>
+              ))}
             </Box>
-          ))}
-        </SimpleGrid>
+          )}
+        </Stack>
       )}
     </Stack>
   );
